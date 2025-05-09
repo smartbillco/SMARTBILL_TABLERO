@@ -1,0 +1,21 @@
+<div (click)="open($event)" class="ngx-daterangepicker-action btn btn-inverse d-flex align-items-center w-100">
+    <i class="fa fa-calendar fa-fw text-white-transparent-5 ms-n1 me-2"></i>
+    <input
+      type="text"
+      class="form-control flex-grow-1 shadow-none overflow-auto"
+      readonly
+      placeholder="Selecciona la fecha"
+      ngxDaterangepickerMd
+      [locale]="locale"
+      [opens]="'right'"
+      [alwaysShowCalendars]="alwaysShowCalendars"
+      [ranges]="ranges"
+      [showDropdowns]="true"
+      [showCustomRangeLabel]="true"
+      [showClearButton]="true"
+      [showCancel]="true"
+      [(ngModel)]="dateselected"
+      (ngModelChange)="onDateRangeChange($event)"
+    />
+    <b class="caret ms-1 opacity-5"></b>
+  </div>

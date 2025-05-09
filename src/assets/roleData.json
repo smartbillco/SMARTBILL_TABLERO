@@ -1,0 +1,15 @@
+[
+    {
+      "id_role": 1,
+      "name": "ADMIN"
+    },
+    {
+      "id_role": 2,
+      "name": "USER"
+    },
+    {
+      "id_role": 3,
+      "name": "DBA"
+    }
+  ]
+  

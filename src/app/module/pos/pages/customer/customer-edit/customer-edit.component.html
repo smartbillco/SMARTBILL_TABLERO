@@ -1,0 +1,159 @@
+<form [formGroup]="form" class="example-container" (ngSubmit)="operate()">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card" style="border: 2px solid #ccc; border-radius: 10px; box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1); padding: 20px; background-color: #f9f9f9;">
+          
+          <!-- Encabezado principal -->
+          <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #e2e2e2; padding-bottom: 10px; margin-bottom: 20px;">
+            <h6 class="titulo" [ngStyle]="{'color': form.valid ? 'green' : '#333'}" style="font-size: 17px; font-weight: bold;">
+                {{ form.valid ? 'DATOS CLIENTE VERIFICADO' : 'COMPLETEMOS DATOS CLIENTE' }}
+            </h6>            <div>
+              <button type="button" mat-icon-button routerLink="/pages/dashboard" matTooltip="Volver al inicio">
+                <mat-icon>home</mat-icon>
+              </button>
+              <button type="button" mat-icon-button routerLink="/pages/customer" matTooltip="Cancelar">
+                <mat-icon>cancel</mat-icon>
+              </button>
+              <button mat-icon-button matTooltip="Guardar cambios" [disabled]="form.invalid " type="submit">
+                <mat-icon>save</mat-icon>
+            </button>
+              <mat-icon *ngIf="form.valid" style="color: green;">check_circle</mat-icon>
+
+            </div>
+          </div>
+  
+          <!-- Imagen -->
+          <div class="row">
+            <div class="col-12 col-md-3" style="margin-bottom: 20px;">
+              <img mat-card [src]="photo_url ? photo_url : 'login/fotoperfil.png'" class="profile-picture" alt="Perfil" (click)="selectImageSource()" matTooltip="Haz clic para cambiar la imagen" matTooltipPosition="above" style="width: 100%; height: 210px; border-radius: 10px; border: 2px solid #ddd;">
+            </div>
+            
+            <div class="col-12 col-md-9">
+              <!-- Primera fila -->
+              <div class="row">
+                <div class="col-12 col-md-3">
+                  <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Nombre</mat-label>
+                    <input matInput placeholder="Nombre" required formControlName="firstName">
+                    <mat-error *ngIf="f['firstName'].invalid && f['firstName'].touched">
+                      <span *ngIf="f['firstName'].errors?.['required']">Campo requerido</span>
+                      <span *ngIf="f['firstName'].errors?.['minlength']">Longitud mínima 3 caracteres</span>
+                      <span *ngIf="f['firstName'].errors?.['pattern']">Nombre no válido</span>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+  
+                <div class="col-12 col-md-3">
+                  <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Apellido</mat-label>
+                    <input matInput placeholder="Apellido" required formControlName="lastName">
+                    <mat-error *ngIf="f['lastName'].invalid && f['lastName'].touched">
+                      <span *ngIf="f['lastName'].errors?.['required']">Campo requerido</span>
+                      <span *ngIf="f['lastName'].errors?.['minlength']">Longitud mínima 3 caracteres</span>
+                      <span *ngIf="f['lastName'].errors?.['pattern']">Apellido no válido</span>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+  
+                <div class="col-12 col-md-3">
+                  <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Tipo de Documento</mat-label>
+                    <mat-select formControlName="idDoctype" required>
+                      <mat-option *ngFor="let iteracion of doctypes" [value]="iteracion.idDocType">
+                        {{ iteracion.nameDocumentType }}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="f['idDoctype'].invalid && f['idDoctype'].touched">
+                      <span *ngIf="f['idDoctype'].errors?.['required']">Campo requerido</span>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+  
+                <div class="col-12 col-md-3">
+                  <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Número de Documento</mat-label>
+                    <input matInput placeholder="Número de Documento" required formControlName="documentNumber">
+                    <button mat-icon-button matSuffix type="button" aria-label="Cargar Documento" (click)="uploadDocument()">
+                      <mat-icon>attach_file</mat-icon>
+                    </button>
+                    <mat-error *ngIf="f['documentNumber'].invalid && f['documentNumber'].touched">
+                      <span *ngIf="f['documentNumber'].errors?.['required']">Campo requerido</span>
+                      <span *ngIf="f['documentNumber'].errors?.['pattern']">Número de documento no válido</span>
+                      <span *ngIf="f['documentNumber'].errors?.['minlength']">Longitud mínima 3 caracteres</span>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+  
+              <!-- Segunda fila -->
+              <div class="row">
+                <div class="col-12 col-md-3">
+                  <mat-form-field class="full-width">
+                    <mat-label>Fecha de Nacimiento</mat-label>
+                    <input matInput [matDatepicker]="picker" formControlName="dateOfBirth" (input)="formatDate($event)"  placeholder="DD/MM/YYYY">
+                    <mat-hint>Formato: DD/MM/YYYY</mat-hint>
+                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                    <mat-error *ngIf="f['dateOfBirth'].invalid && f['dateOfBirth'].touched">
+                      <span *ngIf="f['dateOfBirth'].errors?.['required']">Campo requerido</span>
+                      <span *ngIf="f['dateOfBirth'].errors?.['past']">La fecha debe estar en el pasado</span>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+  
+                <div class="col-12 col-md-3">
+                    <mat-form-field class="full-width">
+                        <mat-label>Número de Teléfono</mat-label>
+                        <input matInput placeholder="Número de Teléfono" required formControlName="phoneNumber">
+                        <mat-error *ngIf="f['phoneNumber'].invalid && f['phoneNumber'].touched">
+                            <span *ngIf="f['phoneNumber'].errors?.['required']">Campo requerido</span>
+                            <span *ngIf="f['phoneNumber'].errors?.['pattern']">Número de teléfono no válido</span>
+                            <span *ngIf="f['phoneNumber'].errors?.['minlength']">Longitud mínima 7 caracteres</span>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="col-12 col-md-3">
+                  <mat-form-field appearance="fill" class="full-width">
+                    <mat-label>Régimen</mat-label>
+                    <mat-select formControlName="idRegime">
+                      <mat-option *ngFor="let iteracion of regimes" [value]="iteracion.idRegime">
+                        {{ iteracion.nameRegime }}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="f['idRegime'].invalid && f['idRegime'].touched">
+                      <span *ngIf="f['idRegime'].errors?.['required']">Campo requerido</span>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-12 col-md-3">
+                    <mat-form-field class="full-width">
+                        <mat-label>Correo Electrónico</mat-label>
+                        <input matInput placeholder="Correo Electrónico" required formControlName="email">
+                        <mat-error *ngIf="f['email'].invalid && f['email'].touched">
+                            <span *ngIf="f['email'].errors?.['email']">Correo no válido</span>
+                            <span *ngIf="f['email'].errors?.['required']">Campo requerido</span>
+                            <span *ngIf="f['email'].errors?.['maxlength']">Máximo 80 caracteres</span>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                
+              </div>
+  
+              <!-- Tercera fila - Dirección -->
+              <div class="row">
+                <div class="col-12">
+                  <mat-form-field class="full-width">
+                    <mat-label>Dirección</mat-label>
+                    <input matInput placeholder="Dirección" required formControlName="address">
+                    <mat-error *ngIf="f['address'].invalid && f['address'].touched">Campo requerido</mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>

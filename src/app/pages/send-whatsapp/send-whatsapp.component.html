@@ -1,0 +1,14 @@
+<div class="container">
+    <h2>Enviar WhatsApp con Twilio</h2>
+    
+    <label>Número de WhatsApp:</label>
+    <input type="text" [(ngModel)]="fromNumber" placeholder="+573001234567">
+    
+    <label>Mensaje:</label>
+    <textarea [(ngModel)]="messageBody" placeholder="Escribe tu mensaje aquí..."></textarea>
+    
+    <button (click)="sendMessage()">Enviar</button>
+    
+    <p>{{ responseMessage }}</p>
+  </div>
+  

@@ -1,0 +1,170 @@
+<form [formGroup]="correspondenceForm" (ngSubmit)="onSubmit()" class="form-container">
+    <!-- Secciones del formulario (se mantienen igual) -->
+    <h5><i class="fas fa-folder-open"></i> Información de Radicación</h5>
+    <div class="grid-container">
+        <div>
+            <label for="filingNumber">Número:</label>
+            <input id="filingNumber" formControlName="filingNumber" type="text" required>
+        </div>
+        <div>
+            <label for="filingDate">Fecha:</label>
+            <input id="filingDate" formControlName="filingDate" type="date" required>
+        </div>
+        <div>
+            <label for="documentDate">Fecha del documento:</label>
+            <input id="documentDate" formControlName="documentDate" type="date" required>
+        </div>
+        <div>
+            <label for="externalFiling">Radicación externa:</label>
+            <input id="externalFiling" formControlName="externalFiling" type="text">
+        </div>
+    </div>
+
+    <h5><i class="fas fa-file-alt"></i> Detalles del Documento</h5>
+    <div class="grid-container">
+        <div>
+            <label for="type">Tipo de correspondencia:</label>
+            <select id="type" formControlName="type" required>
+                <option *ngFor="let type of correspondenceTypes" [value]="type.codCorrespondenceType">
+                    {{ type.descripcion }}
+                </option>
+            </select>
+        </div>
+        <div>
+            <label for="status">Estado de la correspondencia:</label>
+            <select id="status" formControlName="status" required>
+                <option *ngFor="let status of documentStatuses" [value]="status.codDocumentStatus">
+                    {{ status.descripcion }}
+                </option>
+            </select>
+        </div>
+        <div>
+            <label for="correspondenceCategory">Categoría:</label>
+            <select id="correspondenceCategory" formControlName="subtype">
+                <option value="">Seleccione una categoría</option>
+                <option *ngFor="let category of correspondenceCategory" [value]="category.codCorrespondenceCategory">
+                    {{ category.descripcion }}
+                </option>
+            </select>
+        </div>
+
+        <div>
+            <label for="dependence">Dependencia:</label>
+            <select id="dependence" formControlName="dependencia">
+                <option *ngFor="let dependence of dependences" [value]="department.codDependence">
+                    {{ dependence.descripcion }}
+                </option>
+            </select>
+        </div>
+    </div>
+
+    <h5><i class="fas fa-info-circle"></i> Detalles del Asunto</h5>
+    <div class="grid-container subject-section">
+        <div>
+            <label for="subject">Asunto:</label>
+            <input id="subject" formControlName="subject" type="text" required>
+            <small *ngIf="correspondenceForm.get('subject').invalid && correspondenceForm.get('subject').touched">
+                Este campo es requerido y debe tener al menos 5 caracteres.
+            </small>
+        </div>
+        <div>
+            <label for="text">Texto de la solicitud:</label>
+            <textarea id="text" formControlName="text" rows="5" required></textarea>
+            <small *ngIf="correspondenceForm.get('text').invalid && correspondenceForm.get('text').touched">
+                Este campo es requerido.
+            </small>
+        </div>
+    </div>
+
+    <h5><i class="fas fa-user"></i> Información del Remitente</h5>
+    <div formGroupName="sender" class="grid-container">
+        <div>
+            <label for="exampleSender">Remitente:</label>
+            <select id="exampleSender" (change)="onSenderSelect($event)">
+                <option value="">Seleccione un remitente</option>
+                <option *ngFor="let sender of senders" [value]="sender.idUser">
+                    {{ sender.firstName }} {{ sender.lastName }} ({{ sender.documentNumber }})
+                </option>
+            </select>
+        </div>
+        <div>
+            <label for="senderDocumentType">Tipo de documento:</label>
+            <select id="senderDocumentType" formControlName="documentType" required
+                (change)="onDocumentNumberInput($event)">
+                <option value="DNI">DNI</option>
+                <option value="Pasaporte">Pasaporte</option>
+                <option value="Cédula">Cédula</option>
+                <option value="Otro">Otro</option>
+            </select>
+        </div>
+        <div>
+            <label for="senderDocumentNumber"># Documento:</label>
+            <input id="senderDocumentNumber" formControlName="documentNumber" type="text" required
+                (input)="onDocumentNumberInput($event)">
+        </div>
+        <div>
+            <label for="destinationEmail">Correo electrónico:</label>
+            <input id="destinationEmail" formControlName="email" type="email" required>
+        </div>
+        <div>
+            <label for="destinationPhoneNumber">Teléfono:</label>
+            <input id="destinationPhoneNumber" formControlName="phoneNumber" type="text" required>
+        </div>
+        <div>
+            <label for="destinationAddress">Dirección:</label>
+            <input id="destinationAddress" formControlName="address" type="text" required>
+        </div>
+    </div>
+
+    <h5><i class="fas fa-paperclip"></i> Adjuntar soportes</h5>
+    <div formArrayName="attachments" class="attachments-container">
+        <div *ngFor="let attachment of attachments.controls; let i = index" [formGroupName]="i" class="attachment-card">
+            <!-- Mostrar nombre del archivo existente o campo para subir nuevo -->
+            <div class="attachment-details">
+                <label [for]="'attachmentFile' + i">📁 Archivo:</label>
+                <div *ngIf="attachment.get('fileUrl')?.value; else newFile">
+                    <a [href]="attachment.get('fileUrl')?.value" target="_blank" class="existing-file">
+                        {{ attachment.get('name')?.value }}
+                    </a>
+                </div>
+                <ng-template #newFile>
+                    <input 
+                        type="file" 
+                        [id]="'attachmentFile' + i" 
+                        (change)="onFileSelected($event, i)"
+                        class="input-field">
+                </ng-template>
+            </div>
+            
+            <div class="attachment-details">
+                <label [for]="'attachmentDescription' + i">📝 Descripción:</label>
+                <input 
+                    [id]="'attachmentDescription' + i" 
+                    formControlName="description" 
+                    type="text" 
+                    class="input-field">
+            </div>
+        
+            <div class="attachment-actions">
+                <button type="button" (click)="removeAttachment(i)" class="delete-btn">
+                    ❌ Eliminar
+                </button>
+            </div>
+        </div>
+    
+        <button type="button" (click)="addAttachment()" class="add-btn">
+            ➕ Agregar archivo
+        </button>
+    </div>
+
+    <!-- Botones de acción -->
+    <div class="form-actions">
+        <button type="button" class="btn-cancel" (click)="onCancel()">
+            Cancelar
+        </button>
+        
+        <button type="submit" [disabled]="correspondenceForm.invalid" class="btn-submit">
+            {{ isEditMode ? 'Actualizar' : 'Guardar' }}
+        </button>
+    </div>
+</form>

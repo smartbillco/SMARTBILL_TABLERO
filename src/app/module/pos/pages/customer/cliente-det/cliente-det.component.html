@@ -1,0 +1,21 @@
+<div class="tab-container">
+  <mat-tab-group class="custom-tab-group" animationDuration="2000ms">
+    <mat-tab label="Detalle del cliente">
+      <div class="tab-content">
+        <p class="detalle-fila" *ngIf="element"><strong>Identificación: </strong> {{element.documentNumber}}</p>
+        <p class="detalle-fila" *ngIf="element"><strong>Cliente:</strong> {{element.firstName}} {{element.lastName}}</p>
+        <p class="detalle-fila" *ngIf="element"><strong>Celular:</strong> {{element.phoneNumber}}</p>
+        <p class="detalle-fila" *ngIf="element"><strong>Dirección:</strong> {{element.address}}</p>
+        <p class="detalle-fila" *ngIf="element"><strong>Correo:</strong> {{element.email}}</p>
+        <p class="detalle-fila" *ngIf="element"><strong>Fecha nacimiento:</strong> {{element.dateOfBirth | date:'dd/MM/yyyy'}}</p>
+      </div>
+    </mat-tab>
+    
+    <mat-tab label="Contabilidad">
+      <div class="tab-content">
+        <app-cliente-mov class="full-height"></app-cliente-mov>
+      </div>
+    </mat-tab>
+    
+  </mat-tab-group>
+</div>

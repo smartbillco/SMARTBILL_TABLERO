@@ -1,0 +1,74 @@
+<div *ngIf="!isLoading">
+
+    <!-- BEGIN login -->
+    <div class="login login-with-news-feed">
+        <!-- BEGIN news-feed -->
+        <div class="news-feed">
+            <div class="news-image" style="background-image: url(assets/img/login-bg/login-bg-11.jpg)"></div>
+            <div class="news-caption">
+                <h4 class="caption-title"><b>Smartbill</b> Admin App</h4>
+                <p>
+                    Utilizas SmartBill Admin para gestionar tus facturas electronicas.
+                </p>
+            </div>
+        </div>
+        <!-- END news-feed -->
+
+        <!-- BEGIN login-container -->
+        <div class="login-container">
+            <!-- BEGIN login-header -->
+            <div class="login-header mb-30px">
+                <div class="brand">
+                    <div class="d-flex align-items-center">
+                        <span class="logo"></span>
+                        <b>SmartBill</b> Admin
+                    </div>
+                    <small>Manejo facturacion electronica </small>
+                </div>
+                <div class="icon">
+                    <i class="fa fa-sign-in-alt"></i>
+                </div>
+            </div>
+            <!-- END login-header -->
+
+            <!-- BEGIN login-content -->
+            <div class="login-content">
+                <form class="fs-13px" (submit)="onSubmit($event)">
+                    <div class="form-floating mb-15px">
+                        <input type="text" class="form-control h-45px fs-13px" placeholder="Email Address" id="username"
+                            name="username" [(ngModel)]="username" />
+                        <label for="username" class="d-flex align-items-center fs-13px text-gray-600">Dirección de
+                            correo electrónico</label>
+                    </div>
+                    <div class="form-floating mb-15px">
+                        <input type="password" class="form-control h-45px fs-13px" placeholder="Password" id="password"
+                            name="password" [(ngModel)]="password" />
+                        <label for="password" class="d-flex align-items-center fs-13px text-gray-600">Contraseña</label>
+                    </div>
+
+                    <div class="mb-15px">
+                        <button type="submit" (click)="selectLoginMethod('traditional')"
+                            class="btn btn-theme d-block h-45px w-100 btn-lg fs-14px">Sign me in</button>
+                    </div>
+                    <div class="mb-40px pb-0px text-dark">
+                        ¿No es un miembro todavía? Haz clic <a [routerLink]="['/register']" class="text-primary">aquí</a> para
+                        registrarte.
+                    </div>  
+
+                    <!-- Sección de "¿Olvidó su contraseña?" -->
+                    <div class="text-center mb-0">
+                        <a [routerLink]="['/forgot']" class="text-primary fs-13px">¿Olvidó su contraseña?</a>
+                    </div>
+
+                    <hr class="bg-gray-600 opacity-2" />
+                    <div class="text-gray-600 text-center mb-0">
+                        &copy; SmartBill Admin Todos los derechos reservados 2024
+                    </div>
+                </form>
+            </div>
+            <!-- END login-content -->
+        </div>
+        <!-- END login-container -->
+    </div>
+    <!-- END login -->
+</div>

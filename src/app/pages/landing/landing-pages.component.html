@@ -1,0 +1,613 @@
+	<!-- BEGIN #app -->
+	<div id="app" class="fade show">
+		<!-- BEGIN #top-nav -->
+		<div id="top-nav" class="top-nav">
+			<!-- BEGIN container -->
+			<div class="container">
+				<div class="collapse navbar-collapse">
+					<ul class="nav navbar-nav">
+						<!--						-->
+
+						<li class="dropdown dropdown-hover">
+							<a href="#" data-bs-toggle="dropdown"><img src="assets/img/flag/flag-spanish.png" class="flag-img" alt="" /> Español <b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								<li><a href="#" class="dropdown-item"><img src="assets/img/flag/flag-english.png" class="flag-img" alt="" /> English</a></li>
+								<li><a href="#" class="dropdown-item"><img src="assets/img/flag/flag-german.png" class="flag-img" alt="" /> German</a></li>
+								<li><a href="#" class="dropdown-item"><img src="assets/img/flag/flag-english.png" class="flag-img" alt="" /> English</a></li>
+								<li><a href="#" class="dropdown-item"><img src="assets/img/flag/flag-french.png" class="flag-img" alt="" /> French</a></li>
+								<li><a href="#" class="dropdown-item"><img src="assets/img/flag/flag-chinese.png" class="flag-img" alt="" /> Chinese</a></li>
+							</ul>
+						</li>
+						<li><a href="#">Atencion al Cliente</a></li>
+						
+					</ul>
+					<ul class="nav navbar-nav navbar-end">
+
+						<li><a href="#"><i class="fab fa-facebook-f f-s-14"></i></a></li>
+						<li><a href="#"><i class="fab fa-twitter f-s-14"></i></a></li>
+						<li><a href="#"><i class="fab fa-instagram f-s-14"></i></a></li>
+						<li><a href="#"><i class="fab fa-dribbble f-s-14"></i></a></li>
+						<li><a href="#"><i class="fab fa-google f-s-14"></i></a></li>
+					</ul>
+				</div>
+			</div>
+			<!-- END container -->
+		</div>
+		<!-- END #top-nav -->
+		<!-- BEGIN #header -->
+		<div id="header" class="header" data-fixed-top="true">
+			<!-- BEGIN container -->
+			<div class="container">
+				<!-- BEGIN header-container -->
+				<div class="header-container">
+					<!-- BEGIN navbar-toggle -->
+					<button type="button" class="navbar-toggle collapsed" data-bs-toggle="collapse" data-bs-target="#navbar-collapse">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<!-- END navbar-toggle -->
+					<!-- BEGIN header-logo -->
+					<div class="header-logo">
+						<a href="index.html">
+							<span><img src="assets/img/logo.png" width="28px" height="34px">	</span>
+							<span class="brand-text">
+								<span>SmartBill</span>Admin
+								<small>Tu solucion Financiera</small>
+							</span>
+						</a>
+					</div>
+					<!-- END header-logo -->
+					<!-- BEGIN header-nav -->
+					<div class="header-nav">
+						<div class="collapse navbar-collapse" id="navbar-collapse">
+							<ul class="nav justify-content-center">
+								<li class="active">
+									<a [routerLink]="['/module/necessary/pages/welcome']">Inicio</a>
+								</li>								
+								<li class="dropdown dropdown-hover">
+									<a href="#" data-bs-toggle="dropdown">
+										Analisis Financiero
+										<b class="caret"></b>
+										<span class="arrow top"></span>
+									</a>
+									<div class="dropdown-menu">
+										<a class="dropdown-item" href="product.html">Incripcion</a>
+										<a class="dropdown-item" href="product.html">Reportes</a>
+									</div>
+								</li>
+								<li><a href="product.html">Servicios y soportes</a></li>
+								<li class="dropdown dropdown-hover">
+									<a href="#" data-bs-toggle="dropdown">
+										Portafolio
+										<b class="caret"></b>
+										<span class="arrow top"></span>
+									</a>
+									<div class="dropdown-menu">
+										<a class="dropdown-item" href="contact_us.html">Contactanos</a>
+									</div>
+								</li>
+								<li class="dropdown dropdown-hover">
+									<a href="#" data-bs-toggle="dropdown">
+										<i class="fa fa-search search-btn"></i>
+										<span class="arrow top"></span>
+									</a>
+									<div class="dropdown-menu p-15px">
+										<form action="search_results.html" method="POST" name="search_form">
+											<div class="input-group">
+												<input type="text" placeholder="Search" class="form-control bg-light" />
+												<button class="btn btn-dark" type="submit"><i class="fa fa-search"></i></button>
+											</div>
+										</form>
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<!-- END header-nav -->
+					<!-- BEGIN header-nav -->
+					<div class="header-nav">
+						<ul class="nav justify-content-end">
+							<li class="dropdown dropdown-hover">
+								<a href="#" class="header-cart" data-bs-toggle="dropdown">
+									<i class="fa fa-shopping-bag"></i>
+									<span class="total">2</span>
+									<span class="arrow top"></span>
+								</a>
+								<div class="dropdown-menu dropdown-menu-cart p-0">
+									<div class="cart-header">
+										<h4 class="cart-title">Shopping Bag (1) </h4>
+									</div>
+									<div class="cart-body">
+										<ul class="cart-item">
+											<li>
+												<div class="cart-item-image"><img src="assets/img/product/product-ipad.jpg" alt="" /></div>
+												<div class="cart-item-info">
+													<h4>iPad Pro Wi-Fi 128GB - Silver</h4>
+													<p class="price">$699.00</p>
+												</div>
+												<div class="cart-item-close">
+													<a href="#" data-bs-toggle="tooltip" data-bs-title="Remove">&times;</a>
+												</div>
+											</li>
+											<li>
+												<div class="cart-item-image"><img src="assets/img/product/product-imac.jpg" alt="" /></div>
+												<div class="cart-item-info">
+													<h4>21.5-inch iMac</h4>
+													<p class="price">$1299.00</p>
+												</div>
+												<div class="cart-item-close">
+													<a href="#" data-bs-toggle="tooltip" data-bs-title="Remove">&times;</a>
+												</div>
+											</li>
+											<li>
+												<div class="cart-item-image"><img src="assets/img/product/product-iphone.png" alt="" /></div>
+												<div class="cart-item-info">
+													<h4>iPhone 6s 16GB - Silver</h4>
+													<p class="price">$649.00</p>
+												</div>
+												<div class="cart-item-close">
+													<a href="#" data-bs-toggle="tooltip" data-bs-title="Remove">&times;</a>
+												</div>
+											</li>
+										</ul>
+									</div>
+									<div class="cart-footer">
+										<div class="row gx-2">
+											<div class="col-6">
+												<a href="checkout_cart.html" class="btn btn-default btn-theme d-block">View Cart</a>
+											</div>
+											<div class="col-6">
+												<a href="checkout_cart.html" class="btn btn-dark btn-theme d-block">Checkout</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</li>
+							<li class="divider"></li>
+							<li>
+
+								<a [routerLink]="['/login']">
+								<img src="assets/img/user/user-1.jpg" class="user-img" alt="" /> 
+									<span class="d-none d-xl-inline">Login / Register</span>
+								</a>
+							</li>
+						</ul>
+					</div>
+					<!-- END header-nav -->
+				</div>
+				<!-- END header-container -->
+			</div>
+			<!-- END container -->
+		</div>
+		<!-- END #header -->
+		
+		<!-- BEGIN #slider -->
+		<div id="slider" class="section-container p-0 bg-dark">
+			<!-- BEGIN carousel -->
+			<div id="main-carousel" class="carousel slide" data-ride="carousel">
+				<!-- BEGIN carousel-inner -->
+				<div class="carousel-inner">
+					<!-- BEGIN item -->
+					<div class="carousel-item active" data-paroller="true" data-paroller-factor="0.3" data-paroller-factor-sm="0.01" data-paroller-factor-xs="0.01" style="background: url(assets/img/slider/slider-1-cover.jpg) center 0 / cover no-repeat;">
+						<div class="container">
+							<img src="assets/img/slider/slider-1-product.png" class="product-img right bottom animate__fadeInRight animate__animated" alt="" />
+						</div>
+						<div class="carousel-caption carousel-caption-left text-white">
+							<div class="container">
+								<h3 class="title mb-5px animate__fadeInLeftBig animate__animated">SmartBill</h3>
+								<p class="mb-15px animate__fadeInLeftBig animate__animated">Estrategia de facturacion Electronica.</p>
+								<div class="price mb-30px animate__fadeInLeftBig animate__animated"><small>mas</small> <span>Beneficios</span></div>
+								<a [routerLink]="['/module/necessary/welcome']" class="btn btn-outline btn-lg animate__fadeInLeftBig animate__animated">Iniciemos.</a>
+							</div>
+						</div>
+					</div>
+					<!-- END item -->
+					<!-- BEGIN item -->
+					<div class="carousel-item" data-paroller="true" data-paroller-factor="-0.3" data-paroller-factor-sm="0.01" data-paroller-factor-xs="0.01" style="background: url(assets/img/slider/slider-2-cover.jpg) center 0 / cover no-repeat;">
+						<div class="container">
+							<img src="assets/img/slider/slider-2-product.png" class="product-img left bottom animate__fadeInLeft animate__animated" alt="" />
+						</div>
+						<div class="carousel-caption carousel-caption-right text-white">
+							<div class="container">
+								<h3 class="title mb-5px animate__fadeInRightBig animate__animated">SMARTBILL</h3>
+								<p class="mb-15px animate__fadeInRightBig animate__animated">Organiza tu informacion financiera</p>
+								<div class="price mb-30px animate__fadeInRightBig animate__animated"><small>Solo en </small> <span>5 Minutos</span></div>
+								<a href="product_detail.html" class="btn btn-outline btn-lg animate__fadeInRightBig animate__animated">Saber mas.</a>
+							</div>
+						</div>
+					</div>
+					<!-- END item -->
+					<!-- BEGIN item -->
+					<div class="carousel-item" data-paroller="true" data-paroller-factor="-0.3" data-paroller-factor-sm="0.01" data-paroller-factor-xs="0.01" style="background: url(assets/img/slider/slider-3-cover.jpg) center 0 / cover no-repeat;">
+						<div class="carousel-caption text-white">
+							<div class="container">
+								<h3 class="title mb-5px animate__fadeInDownBig animate__animated">SmartBill</h3>
+								<p class="mb-15px animate__fadeInDownBig animate__animated">Ven y disfuta de todos los<br />beneficios</p>
+								<!--<div class="price animate__fadeInDownBig animate__animated"><small>from</small> <span>$999.00</span></div>-->
+								<a href="product_detail.html" class="btn btn-outline btn-lg animate__fadeInUpBig animate__animated">Sigueme.</a>
+							</div>
+						</div>
+					</div>
+					<!-- END item -->
+				</div>
+				<!-- END carousel-inner -->
+				<a class="carousel-control-prev" href="#main-carousel" data-bs-slide="prev"> 
+					<i class="fa fa-angle-left"></i> 
+				</a>
+				<a class="carousel-control-next" href="#main-carousel" data-bs-slide="next"> 
+					<i class="fa fa-angle-right"></i> 
+				</a>
+			</div>
+			<!-- END carousel -->
+		</div>
+		<!-- END #slider -->
+		
+<!-- BEGIN #promotions -->
+<div id="promotions" class="section-container bg-component">
+    <!-- BEGIN container -->
+    <div class="container">
+        <!-- BEGIN section-title -->
+        <h4 class="section-title clearfix">
+            <span class="flex-1">
+                Promociones Exclusivas
+                <small>Del 25 de septiembre 2024 al 1 de enero 2025</small>
+            </span>
+            <a href="#" class="btn">VER TODAS</a>
+        </h4>
+        <!-- END section-title -->
+        <!-- BEGIN row -->
+        <div class="row gx-2">
+            <!-- BEGIN col-6 -->
+            <div class="col-lg-6">
+                <!-- BEGIN promotion -->
+                <div class="promotion promotion-lg bg-dark">
+                    <div class="promotion-image text-end promotion-image-overflow-bottom">
+                        <img src="assets/img/product/product-iphone-12.png" alt="Servicio Básico" />
+                    </div>
+                    <div class="promotion-caption promotion-caption-inverse">
+                        <h4 class="promotion-title">Servicio Básico</h4>
+                        <div class="promotion-price"><small>desde</small> $0.00</div>
+                        <p class="promotion-desc">Facturación electrónica ágil para pequeñas empresas.</p>
+                        <a href="#" class="promotion-btn">Ver Más</a>
+                    </div>
+                </div>
+                <!-- END promotion -->
+            </div>
+            <!-- END col-6 -->
+            <!-- BEGIN col-3 -->
+            <div class="col-lg-3 col-md-6">
+                <!-- BEGIN promotion -->
+                <div class="promotion bg-blue">
+                    <div class="promotion-image promotion-image-overflow-bottom promotion-image-overflow-top">
+                        <img src="assets/img/product/product-apple-watch-sm.png" alt="Servicio Premium" />
+                    </div>
+                    <div class="promotion-caption promotion-caption-inverse text-end">
+                        <h4 class="promotion-title">Servicio Premium</h4>
+                        <div class="promotion-price"><small>desde</small> $0.00</div>
+                        <p class="promotion-desc">Soporte avanzado para alta facturación.</p>
+                        <a href="#" class="promotion-btn">Ver Más</a>
+                    </div>
+                </div>
+                <!-- END promotion -->
+                <!-- BEGIN promotion -->
+                <div class="promotion bg-gray-200">
+                    <div class="promotion-image text-center promotion-image-overflow-bottom">
+                        <img src="assets/img/product/product-mac-mini.png" alt="Paquete Corporativo" />
+                    </div>
+                    <div class="promotion-caption text-center">
+                        <h4 class="promotion-title">Paquete Corporativo</h4>
+                        <div class="promotion-price"><small>desde</small> $0.00</div>
+                        <p class="promotion-desc">Ideal para empresas con múltiples.</p>
+                        <a href="#" class="promotion-btn">Ver Más</a>
+                    </div>
+                </div>
+                <!-- END promotion -->
+            </div>
+            <!-- END col-3 -->
+            <!-- BEGIN col-3 -->
+            <div class="col-lg-3 col-md-6">
+                <!-- BEGIN promotion -->
+                <div class="promotion bg-gray-200">
+                    <div class="promotion-image promotion-image-overflow-right promotion-image-overflow-bottom text-end">
+                        <img src="assets/img/product/product-mac-accessories.png" alt="Asesoría Personalizada" />
+                    </div>
+                    <div class="promotion-caption text-center">
+                        <h4 class="promotion-title">Asesoría Personalizada</h4>
+                        <div class="promotion-price"><small>desde</small> $0.00</div>
+                        <p class="promotion-desc">Optimiza tus procesos de facturación con expertos.</p>
+                        <a href="#" class="promotion-btn">Ver Más</a>
+                    </div>
+                </div>
+                <!-- END promotion -->
+                <!-- BEGIN promotion -->
+                <div class="promotion bg-dark">
+                    <div class="promotion-image text-end">
+                        <img src="assets/img/product/product-mac-pro.png" alt="Plan de Integración Completa" />
+                    </div>
+                    <div class="promotion-caption promotion-caption-inverse">
+                        <h4 class="promotion-title">Plan de Integración</h4>
+                        <div class="promotion-price"><small>desde</small> $0.00</div>
+                        <p class="promotion-desc">Integra facturación en todos tus sistemas.</p>
+                        <a href="#" class="promotion-btn">Ver Más</a>
+                    </div>
+                </div>
+                <!-- END promotion -->
+            </div>
+            <!-- END col-3 -->
+        </div>
+        <!-- END row -->
+    </div>
+    <!-- END container -->
+</div>
+<!-- END #promotions -->
+		
+				
+<!-- BEGIN #policy -->
+<div id="policy" class="section-container bg-component">
+    <!-- BEGIN container -->
+    <div class="container">
+        <!-- BEGIN row -->
+        <div class="row">
+            <!-- BEGIN col-4 -->
+            <div class="col-lg-4 col-md-4 mb-4 mb-md-0">
+                <!-- BEGIN policy -->
+                <div class="policy">
+                    <div class="policy-icon"><i class="fa fa-file-invoice-dollar"></i></div>
+                    <div class="policy-info">
+                        <h4>Implementación Gratuita</h4>
+                        <p>Recibe asistencia gratuita en la configuración inicial para tu facturación electrónica.</p>
+                    </div>
+                </div>
+                <!-- END policy -->
+            </div>
+            <!-- END col-4 -->
+            <!-- BEGIN col-4 -->
+            <div class="col-lg-4 col-md-4 mb-4 mb-md-0">
+                <!-- BEGIN policy -->
+                <div class="policy">
+                    <div class="policy-icon"><i class="fa fa-shield-alt"></i></div>
+                    <div class="policy-info">
+                        <h4>Garantía de Seguridad de Datos</h4>
+                        <p>Protegemos toda tu información bajo estrictos protocolos de seguridad.</p>
+                    </div>
+                </div>
+                <!-- END policy -->
+            </div>
+            <!-- END col-4 -->
+            <!-- BEGIN col-4 -->
+            <div class="col-lg-4 col-md-4">
+                <!-- BEGIN policy -->
+                <div class="policy">
+                    <div class="policy-icon"><i class="fa fa-headset"></i></div>
+                    <div class="policy-info">
+                        <h4>Soporte Técnico 24/7</h4>
+                        <p>Acceso a soporte especializado en facturación electrónica en cualquier momento.</p>
+                    </div>
+                </div>
+                <!-- END policy -->
+            </div>
+            <!-- END col-4 -->
+        </div>
+        <!-- END row -->
+    </div>
+    <!-- END container -->
+</div>
+<!-- END #policy -->		
+		<!-- BEGIN #subscribe -->
+		<div id="subscribe" class="section-container">
+			<!-- BEGIN container -->
+			<div class="container">
+				<!-- BEGIN row -->
+				<div class="row">
+					<!-- BEGIN col-6 -->
+					<div class="col-md-6 mb-4 mb-md-0">
+						<!-- BEGIN subscription -->
+						<div class="subscription">
+							<div class="subscription-intro">
+								<h4> MANTENGASE EN CONTACTO</h4>
+								<p>Obtenga actualizaciones sobre los nuevos servicios</p>
+							</div>
+							<div class="subscription-form">
+								<form name="subscription_form" action="index.html" method="POST">
+									<div class="input-group">
+										<input type="text" class="form-control" name="email" placeholder="Enter Email Address" />
+										<button type="submit" class="btn btn-dark"><i class="fa fa-angle-right"></i></button>
+									</div>
+								</form>
+							</div>
+						</div>
+						<!-- END subscription -->
+					</div>
+					<!-- END col-6 -->
+					<!-- BEGIN col-6 -->
+					<div class="col-md-6">
+						<!-- BEGIN social -->
+						<div class="social">
+							<div class="social-intro">
+								<h4>Siguenos</h4>
+								<p>Queremos saber de ti!</p>
+							</div>
+							<div class="social-list">
+								<a href="#"><i class="fab fa-facebook"></i></a>
+								<a href="#"><i class="fab fa-twitter"></i></a>
+								<a href="#"><i class="fab fa-instagram"></i></a>
+								<a href="#"><i class="fab fa-dribbble"></i></a>
+								<a href="#"><i class="fab fa-google-plus"></i></a>
+							</div>
+						</div>
+						<!-- END social -->
+					</div>
+					<!-- END col-6 -->
+				</div>
+				<!-- END row -->
+			</div>
+			<!-- END container -->
+		</div>
+		<!-- END #subscribe -->
+		
+		<!-- BEGIN #footer -->
+		<div id="footer" class="footer">
+			<!-- BEGIN container -->
+			<div class="container">
+				<!-- BEGIN row -->
+				<div class="row">
+				<!-- BEGIN col-3 -->
+				<div class="col-lg-3">
+					<h4 class="footer-header">SOBRE NOSOTROS</h4>
+					<p>
+						Somos expertos en soluciones de facturación electrónica, ayudando a empresas a digitalizar y optimizar sus procesos de emisión y gestión de facturas. Nos enfocamos en proporcionar un servicio confiable, seguro y adaptado a la normativa actual.
+					</p>
+					<p class="mb-lg-4 mb-0">
+						Nuestra plataforma facilita la generación, envío y almacenamiento de facturas electrónicas, garantizando la eficiencia en cada transacción. Trabajamos para simplificar la contabilidad de nuestros clientes y asegurar el cumplimiento fiscal.
+					</p>
+				</div>
+				<!-- END col-3 -->
+
+<!-- BEGIN col-3 -->
+				<div class="col-lg-3">
+					<h4 class="footer-header">ENLACES RELACIONADOS</h4>
+					<ul class="fa-ul mb-lg-4 mb-0 p-0">
+						<li><i class="fa fa-fw fa-angle-right"></i> <a href="#">Ayuda de Compras</a></li>
+						<li><i class="fa fa-fw fa-angle-right"></i> <a href="#">Términos de Uso</a></li>
+						<li><i class="fa fa-fw fa-angle-right"></i> <a href="#">Contáctenos</a></li>
+						<li><i class="fa fa-fw fa-angle-right"></i> <a href="#">Carreras</a></li>
+						<li><i class="fa fa-fw fa-angle-right"></i> <a href="#">Método de Pago</a></li>
+						<li><i class="fa fa-fw fa-angle-right"></i> <a href="#">Ventas y Reembolsos</a></li>
+						<li><i class="fa fa-fw fa-angle-right"></i> <a href="#">Mapa del Sitio</a></li>
+						<li><i class="fa fa-fw fa-angle-right"></i> <a href="#">Privacidad y Política</a></li>
+					</ul>
+				</div>
+					<!-- END col-3 -->
+					<!-- BEGIN col-3 -->
+					<div class="col-lg-3">
+						<h4 class="footer-header">SERVICIOS DESTACADOS</h4>
+						<ul class="list-unstyled list-product mb-lg-4 mb-0 p-0">
+							<li>
+								<div class="image">
+									<img src="assets/img/product/product-iphone-6s.jpg" alt="" />
+								</div>
+								<div class="info">
+									<h4 class="info-title">Respaldo Informacion</h4>
+									<div class="price">$0.00</div>
+								</div>
+							</li>
+							<li>
+								<div class="image">
+									<img src="assets/img/product/product-galaxy-s6.jpg" alt="" />
+								</div>
+								<div class="info">
+									<h4 class="info-title">Analisis Factura</h4>
+									<div class="price">$0.00</div>
+								</div>
+							</li>
+							<li>
+								<div class="image">
+									<img src="assets/img/product/product-ipad-pro.jpg" alt="" />
+								</div>
+								<div class="info">
+									<h4 class="info-title">API de Facturación</h4>
+									<div class="price">$0.00</div>
+								</div>
+							</li>
+							<li>
+								<div class="image">
+									<img src="assets/img/product/product-galaxy-note5.jpg" alt="" />
+								</div>
+								<div class="info">
+									<h4 class="info-title">Consultoría y Soporte</h4>
+									<div class="price">$0.00</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+					<!-- END col-3 -->
+					<!-- BEGIN col-3 -->
+					<div class="col-lg-3">
+						<h4 class="footer-header">NUESTRO CONTACTO</h4>
+						<address class="mb-lg-4 mb-0">
+							<strong>Bogota</strong><br />
+							CRA 145F # 147-48<br />
+							Colombia<br /><br />
+							<abbr title="Phone">Celular:</abbr> 3007978251<br />
+							<abbr title="Fax">Fax:</abbr> (123) 456-7891<br />
+							<abbr title="Email">Email:</abbr> <a href="smartbill.co@gmail.com">smartbill.cogmail.com</a><br />
+							<abbr title="Skype">Skype:</abbr> <a href="skype:smartbill">smartbill.skip</a>
+						</address>
+					</div>
+					<!-- END col-3 -->
+				</div>
+				<!-- END row -->
+			</div>
+			<!-- END container -->
+		</div>
+		<!-- END #footer -->
+		
+		<!-- BEGIN #footer-copyright -->
+		<div id="footer-copyright" class="footer-copyright">
+			<!-- BEGIN container -->
+			<div class="container">
+				<div class="payment-method">
+					<img src="assets/img/payment/payment-method.png" alt="" />
+				</div>
+				<div class="copyright">
+					Copyright &copy; 2024 smartbill. Todos los derechos reservados.
+				</div>
+			</div>
+			<!-- END container -->
+		</div>
+		<!-- END #footer-copyright -->
+	</div>
+	<!-- END #app -->
+
+	<!-- BEGIN theme-panel -->
+	<div class="theme-panel">
+		<a href="javascript:;" data-toggle="theme-panel-expand" class="theme-collapse-btn"><i class="fa fa-cog"></i></a>
+		<div class="theme-panel-content">
+			<div class="theme-list clearfix">
+				<div class="theme-list-item"><a href="javascript:;" class="bg-red" data-theme-class="theme-red" data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Red" data-original-title="" title="">&nbsp;</a></div>
+				<div class="theme-list-item"><a href="javascript:;" class="bg-pink" data-theme-class="theme-pink" data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Pink" data-original-title="" title="">&nbsp;</a></div>
+				<div class="theme-list-item"><a href="javascript:;" class="bg-orange" data-theme-class="theme-orange" data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Orange" data-original-title="" title="">&nbsp;</a></div>
+				<div class="theme-list-item"><a href="javascript:;" class="bg-yellow" data-theme-class="theme-yellow" data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Yellow" data-original-title="" title="">&nbsp;</a></div>
+				<div class="theme-list-item"><a href="javascript:;" class="bg-lime" data-theme-class="theme-lime" data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Lime" data-original-title="" title="">&nbsp;</a></div>
+				<div class="theme-list-item"><a href="javascript:;" class="bg-green" data-theme-class="theme-green" data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Green" data-original-title="" title="">&nbsp;</a></div>
+				<div class="theme-list-item active"><a href="javascript:;" class="bg-teal" data-theme-class="" data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Default" data-original-title="" title="">&nbsp;</a></div>
+				<div class="theme-list-item"><a href="javascript:;" class="bg-cyan" data-theme-class="theme-cyan" data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Aqua" data-original-title="" title="">&nbsp;</a></div>
+				<div class="theme-list-item"><a href="javascript:;" class="bg-blue" data-theme-class="theme-blue" data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Blue" data-original-title="" title="">&nbsp;</a></div>
+				<div class="theme-list-item"><a href="javascript:;" class="bg-purple" data-theme-class="theme-purple" data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Purple" data-original-title="" title="">&nbsp;</a></div>
+				<div class="theme-list-item"><a href="javascript:;" class="bg-indigo" data-theme-class="theme-indigo" data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Indigo" data-original-title="" title="">&nbsp;</a></div>
+				<div class="theme-list-item"><a href="javascript:;" class="bg-gray-500" data-theme-class="theme-gray-500" data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body" data-bs-title="Gray" data-original-title="" title="">&nbsp;</a></div>
+			</div>
+			<hr class="mb-0" />
+			<div class="row mt-10px pt-3px">
+				<div class="col-9 control-label text-dark fw-bold">
+					<div>Modo oscuro <span class="badge bg-primary ms-1 position-relative py-4px px-6px" style="top: -1px">NEW</span></div>
+					<div class="lh-14 fs-13px">
+						<small class="text-dark opacity-50">
+							Ajusta la apariencia.
+						</small>
+					</div>
+				</div>
+				<div class="col-3 d-flex">
+					<div class="form-check form-switch ms-auto mb-0 mt-2px">
+						<input type="checkbox" class="form-check-input" name="app-theme-dark-mode" id="appThemeDarkMode" value="1" />
+						<label class="form-check-label" for="appThemeDarkMode">&nbsp;</label>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- END theme-panel -->
+	 
+<!-- ================== BEGIN BASE JS ================== 
+	<script src="../../../assets/js/e-commerce/vendor.min.js"></script>
+	<script src="../../../assets/js/e-commerce/app.min.js"></script>
+	
+
+	,
+              
+              "src/assets/js/e-commerce/vendor.min.js",
+              "src/assets/js/e-commerce/app.min.js"
+			  
+</body>
+</html>-->

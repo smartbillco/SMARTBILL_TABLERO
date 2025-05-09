@@ -1,0 +1,78 @@
+<div class="pdf-reader-container">
+  <h2>Lector de Facturas PDF</h2>
+
+  <!-- Selector de archivos -->
+  <div class="file-input-container">
+    <label for="pdfInput" class="file-input-label">
+      Seleccionar factura PDF
+      <input
+        id="pdfInput"
+        type="file"
+        (change)="onFileSelected($event)"
+        accept="application/pdf"
+        class="file-input"
+      />
+    </label>
+  </div>
+
+  <!-- Indicador de carga -->
+  <div *ngIf="isLoading" class="loading-indicator">Procesando archivo...</div>
+  
+  <!-- Mensaje de error -->
+  <div *ngIf="parsingError" class="error-message">{{ parsingError }}</div>
+
+  <!-- Mostrar datos extraídos -->
+  <div *ngIf="companyData && !parsingError" class="results-container">
+    <h3>Datos de la Empresa</h3>
+    <div class="field">
+      <span class="field-label">ID Empresa:</span>
+      <span class="field-value">{{ companyData.id }}</span>
+    </div>
+    <div class="field">
+      <span class="field-label">Nombre Registrado:</span>
+      <span class="field-value">{{ companyData.registrationName }}</span>
+    </div>
+    <div class="field">
+      <span class="field-label">Total Facturación Convertido:</span>
+      <span class="field-value">${{ companyData.totalBilledConverted }} COP</span>
+    </div>
+
+    <h3>Facturas Asociadas</h3>
+    <div *ngFor="let invoice of companyData.invoices" class="invoice">
+      <h4>Factura {{ invoice.id }}</h4>
+      <div class="field">
+        <span class="field-label">Cliente:</span>
+        <span class="field-value">{{ invoice.cliente }}</span>
+      </div>
+      <div class="field">
+        <span class="field-label">Correo de la Empresa:</span>
+        <span class="field-value">{{ invoice.companyEmail }}</span>
+      </div>
+      <div class="field">
+        <span class="field-label">Referencia de Documento:</span>
+        <span class="field-value">{{ invoice.documentReference }}</span>
+      </div>
+      <div class="field">
+        <span class="field-label">Fecha de Emisión:</span>
+        <span class="field-value">{{ invoice.issueDate | date: 'dd/MM/yyyy' }}</span>
+      </div>
+      <div class="field">
+        <span class="field-label">Hora de Emisión:</span>
+        <span class="field-value">{{ invoice.issueTime }}</span>
+      </div>
+      <div class="field">
+        <span class="field-label">Total Factura:</span>
+        <span class="field-value">${{ invoice.totalFactura }} COP</span>
+      </div>
+      
+      <h5>Ítems de la Factura</h5>
+      <ul>
+        <li *ngFor="let item of invoice.descriptionsItem; let i = index">
+          {{ item }}: ${{ invoice.precioItemFormatted[i] }} (Impuesto: {{ invoice.impuestoValorItemFormatted[i] }} {{ invoice.impuestoClaseItem[i] }})
+        </li>
+      </ul>
+    </div>
+  </div>
+
+
+</div>

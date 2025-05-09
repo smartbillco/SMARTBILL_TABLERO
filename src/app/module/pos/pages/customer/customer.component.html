@@ -1,0 +1,201 @@
+<!-- cliente-gestion.component.html -->
+<router-outlet></router-outlet>
+
+<div [hidden]="checkChildren()">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card">
+        <!-- Encabezado principal -->
+        <div style="display: flex; justify-content: space-between; align-items: center; border: 2px solid #ffffff; background-color: #e2dcdc; padding: 10px;">
+          <app-logo></app-logo>
+          <h6 class="titulo" style="flex: 100%; font-size: 17px; font-weight: bold;">GESTION CLIENTE</h6>
+          <div style="flex: 30%; display: flex; justify-content: flex-end; align-items: center;">
+            <button class="btn btn-light btn--icon-text" [routerLinkActive]="['active']" routerLink="/pages/dashboard">
+              <i class="zmdi zmdi-home"></i> Home
+            </button>
+          </div>
+          <app-boton-menu
+            [icon]="'dialpad'"
+            [menuOptions]="[
+              { icon: 'add_circle', label: 'Nuevo Cliente', route: '/pages/customer/new' },
+              { icon: 'upgrade', label: 'Exportar', submenu: [
+                { icon: 'insert_drive_file', label: 'Excel', action: exportExcel },
+                { icon: 'picture_as_pdf', label: 'PDF', action: exportPdf }
+              ] },
+              { icon: 'cloud_upload', label: 'Cargar archivo por lotes', action: uploadBatch }
+            ]"
+            (optionSelected)="onOptionSelected($event)">
+          </app-boton-menu>
+        </div>
+
+        <!-- Campo de búsqueda -->
+        <mat-form-field class="filter-field">
+          <mat-label>Filtrar</mat-label>
+          <input matInput (keyup)="applyFilter($event)" placeholder="Ej. Cliente" #input>
+        </mat-form-field>
+
+        <!-- Tabla expandible de clientes -->
+        <table mat-table [dataSource]="dataSource" matSort multiTemplateDataRows class="mat-elevation-z8">
+         
+         
+          <!-- Columna de imagen de perfil -->
+          <ng-container matColumnDef="profileImage">
+            <th mat-header-cell *matHeaderCellDef> Imagen </th>
+            <td mat-cell *matCellDef="let element"> 
+              
+              <img [src]="element.profileImage ? element.profileImage : element.photo_url"
+              alt="{{element.firstName}}"
+              width="60" height="50"
+              class="profile-picture">          
+            </ng-container>
+
+          <!-- Columna de ID de cliente -->
+          <ng-container matColumnDef="idCustomer">
+            <th mat-header-cell *matHeaderCellDef> ID Cliente </th>
+            <td mat-cell *matCellDef="let element"> {{ element.idCustomer }} </td>
+          </ng-container>
+
+          <!-- Columna de primer nombre -->
+          <ng-container matColumnDef="firstName">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
+            <td mat-cell *matCellDef="let element"> {{ element.firstName }} </td>
+          </ng-container>
+
+            <!-- First Name 
+            <ng-container matColumnDef="firstName">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header >Nombre </th>
+              <td mat-cell *matCellDef="let element"  [style.width]="'auto'" [style.width]="'10px'"> {{element.firstName}}  {{element.lastName}}</td>
+            </ng-container>-->
+
+          <!-- Columna de apellido -->
+          <ng-container matColumnDef="lastName">
+            <th mat-header-cell *matHeaderCellDef> Apellido </th>
+            <td mat-cell *matCellDef="let element"> {{ element.lastName }} </td>
+          </ng-container>
+
+          <!-- Columna de tipo de documento -->
+          <ng-container matColumnDef="documentType">
+            <th mat-header-cell *matHeaderCellDef> Tipo de Documento </th>
+            <td mat-cell *matCellDef="let element"> {{ element.documentType }} </td>
+          </ng-container>
+
+          <!-- Columna de número de documento -->
+          <ng-container matColumnDef="documentNumber">
+            <th mat-header-cell *matHeaderCellDef> Número de Documento </th>
+            <td mat-cell *matCellDef="let element"> {{ element.documentNumber }} </td>
+          </ng-container>
+
+          <!-- Columna de número de teléfono -->
+          <ng-container matColumnDef="phoneNumber">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Teléfono </th>
+            <td mat-cell *matCellDef="let element"> {{ element.phoneNumber }} </td>
+          </ng-container>
+
+          <!-- Columna de dirección -->
+          <ng-container matColumnDef="address">
+            <th mat-header-cell *matHeaderCellDef> Dirección </th>
+            <td mat-cell *matCellDef="let element"> {{ element.address }} </td>
+          </ng-container>
+
+          <!-- Columna de email -->
+          <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef> Email </th>
+            <td mat-cell *matCellDef="let element"> {{ element.email }} </td>
+          </ng-container>
+
+          <!-- Columna de fecha de nacimiento -->
+          <ng-container matColumnDef="dateOfBirth">
+            <th mat-header-cell *matHeaderCellDef> Fecha de Nacimiento </th>
+            <td mat-cell *matCellDef="let element"> {{ element.dateOfBirth | date }} </td>
+          </ng-container>
+
+          <!-- Columna de régimen -->
+          <ng-container matColumnDef="id_regime">
+            <th mat-header-cell *matHeaderCellDef> Régimen </th>
+            <td mat-cell *matCellDef="let element"> {{ element.id_regime }} </td>
+          </ng-container>
+
+            <!-- Actions -->
+            <ng-container matColumnDef="actions">
+              <th mat-header-cell *matHeaderCellDef> Actions </th>
+              <td mat-cell *matCellDef="let row">
+                <i [routerLink]="['edit', row.idCustomer]" class="fas fa-cog icon-large icon-edit" matTooltip="Editar {{row.firstName}} "></i>
+                <span style="margin-left: 8px;"></span>
+                <i (click)="delete(row.idCustomer)" class="far fa-trash-alt icon-large icon-delete" matTooltip="Eliminar {{row.firstName}} "></i>
+              </td>
+            </ng-container>
+
+          <!-- Columna de expandir -->
+          <ng-container matColumnDef="expand">
+            <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
+            <td mat-cell *matCellDef="let element">
+              <button mat-icon-button aria-label="expand row" (click)="expandedElement = expandedElement === element ? null : element; $event.stopPropagation()">
+                <mat-icon>{{ expandedElement === element ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+
+          <!-- Detalle expandible -->
+          <ng-container matColumnDef="expandedDetail">
+            <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplayWithExpand.length">
+              <div class="example-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+                
+                
+                <div class="detail-column" style="display: flex; flex-direction: column; height: 100%;">
+                  <!-- Pasamos el elemento seleccionado al componente hijo -->
+                  <app-cliente-det [element]="element" style="flex-grow: 1;"></app-cliente-det>
+                </div>
+
+              <!--
+                <div class="example-element-diagram">
+                  <div class="example-element-position"> {{ element.position }} </div>
+                  <div class="example-element-symbol"> {{ element.symbol }} </div>
+                  <div class="example-element-name"> {{ element.name }} </div>
+                  <div class="example-element-weight"> {{ element.weight }} </div>
+                </div>
+                <div class="example-element-description">
+                  {{ element.description }}
+                  <span class="example-element-description-attribution"> -- Wikipedia </span>
+                </div>
+              -->
+
+
+              </div>
+            </td>
+          </ng-container>
+
+          <!-- Filas -->
+          <tr mat-header-row *matHeaderRowDef="columnsToDisplayWithExpand"></tr>
+          <tr mat-row *matRowDef="let element; columns: columnsToDisplayWithExpand"
+              class="example-element-row"
+              [class.example-expanded-row]="expandedElement === element"
+              (click)="expandedElement = expandedElement === element ? null : element">
+          </tr>
+
+          <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+        
+        </table>
+
+
+
+
+
+
+
+
+
+        <mat-paginator [pageSizeOptions]="[5, 10, 25, 50, 100]" aria-label="Seleccionar página de clientes"></mat-paginator>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="card">
+        <!-- Encabezado del reporte -->
+        <div style="display: flex; justify-content: space-between; align-items: center; border: 2px solid #ffffff; background-color: #e2dcdc; padding: 10px;">
+          <h6 class="titulo" style="flex: 100%; font-size: 17px; font-weight: bold;">REPORTE CLIENTE</h6>
+        </div>
+        <!-- Contenido del reporte -->
+      </div>      
+    </div>
+  </div>
+</div> 

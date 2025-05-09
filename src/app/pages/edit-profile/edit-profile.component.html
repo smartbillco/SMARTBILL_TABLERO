@@ -1,0 +1,226 @@
+<div class="profile-edit-container">
+
+  <form [formGroup]="profileForm.formInstance" class="profile-form" *ngIf="profileForm" (ngSubmit)="updateProfile()">    <div class="row">
+      <!-- Columna 1 - Información Personal -->
+      <div class="col-md-6">
+        <div class="profile-section mb-4">
+          <h5 class="section-title">Información Personal</h5>
+          
+          <!-- Foto de Perfil -->
+          <div class="profile-picture-upload mb-3">
+            <div class="current-photo" *ngIf="userData?.photo_url">
+              <img [src]="previewImage || userData.photo_url" alt="Foto de perfil" class="profile-photo">
+            </div>
+            <div class="upload-controls" *ngIf="isEditing">
+              <input type="file" id="profilePhoto" (change)="onFileSelected($event)" accept="image/*" hidden>
+              <label for="profilePhoto" class="btn btn-sm btn-outline-secondary">
+                <i class="fas fa-camera me-1"></i> Cambiar foto
+              </label>
+              <small class="text-muted ms-2" *ngIf="selectedFile">{{ selectedFile.name }}</small>
+            </div>
+          </div>
+
+          <!-- Nombres -->
+          <div class="row g-2 mb-3">
+            <div class="col-md-6">
+              <label class="form-label">Primer Nombre</label>
+              <input type="text" class="form-control" formControlName="firstName" 
+                     [readOnly]="!isEditing"
+                     [ngClass]="{'is-invalid': hasError('firstName', 'required')}">
+              <div class="invalid-feedback">El primer nombre es obligatorio</div>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Segundo Nombre</label>
+              <input type="text" class="form-control" formControlName="secondName" 
+                     [readOnly]="!isEditing">
+            </div>
+          </div>
+
+          <!-- Apellidos -->
+          <div class="row g-2 mb-3">
+            <div class="col-md-6">
+              <label class="form-label">Primer Apellido</label>
+              <input type="text" class="form-control" formControlName="lastName" 
+                     [readOnly]="!isEditing"
+                     [ngClass]="{'is-invalid': hasError('lastName', 'required')}">
+              <div class="invalid-feedback">El primer apellido es obligatorio</div>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Segundo Apellido</label>
+              <input type="text" class="form-control" formControlName="secondLastName" 
+                     [readOnly]="!isEditing">
+            </div>
+          </div>
+
+          <!-- Email -->
+          <div class="mb-3">
+            <label class="form-label">Correo Electrónico</label>
+            <input type="email" class="form-control" formControlName="email" 
+                   [readOnly]="!isEditing"
+                   [ngClass]="{'is-invalid': hasError('email', 'required') || hasError('email', 'email')}">
+            <div class="invalid-feedback">
+              <span *ngIf="hasError('email', 'required')">El correo es obligatorio</span>
+              <span *ngIf="hasError('email', 'email')">Ingrese un correo válido</span>
+            </div>
+          </div>
+
+          <!-- Teléfono -->
+          <div class="mb-3">
+            <label class="form-label">Teléfono</label>
+            <input type="tel" class="form-control" formControlName="phoneNumber" 
+                   [readOnly]="!isEditing"
+                   [ngClass]="{'is-invalid': hasError('phoneNumber', 'required') || hasError('phoneNumber', 'pattern')}">
+            <div class="invalid-feedback">
+              <span *ngIf="hasError('phoneNumber', 'required')">El teléfono es obligatorio</span>
+              <span *ngIf="hasError('phoneNumber', 'pattern')">Formato: + seguido de 9-15 dígitos</span>
+            </div>
+          </div>
+
+          <!-- Dirección -->
+          <div class="mb-3">
+            <label class="form-label">Dirección</label>
+            <textarea class="form-control" formControlName="address" rows="2" 
+                      [readOnly]="!isEditing"
+                      [ngClass]="{'is-invalid': hasError('address', 'required')}"></textarea>
+            <div class="invalid-feedback">La dirección es obligatoria</div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Columna 2 - Información Documental y Sistema -->
+      <div class="col-md-6">
+        <div class="profile-section mb-4">
+          <h5 class="section-title">Documentación</h5>
+          
+          <!-- Tipo de Documento-->
+          <div class="mb-3">
+            <label class="form-label">Tipo de Documento</label>
+            <!---->
+            <select class="form-select" formControlName="documentType" [disabled]="!isEditing"
+                    [ngClass]="{'is-invalid': hasError('documentType', 'required')}">
+              <option value="" disabled>Seleccione...</option>
+              <option *ngFor="let type of doctypes" [value]="type.nameDocumentType">
+                {{ type.nameDocumentType }}
+              </option>
+            </select>
+            
+            <div class="invalid-feedback">Seleccione un tipo de documento</div>
+          </div> 
+
+          <!-- Número de Documento -->
+          <div class="mb-3">
+            <label class="form-label">Número de Documento</label>
+            <input type="text" class="form-control" formControlName="documentNumber" 
+                   [readOnly]="!isEditing"
+                   [ngClass]="{'is-invalid': hasError('documentNumber', 'required')}">
+            <div class="invalid-feedback">El número de documento es obligatorio</div>
+          </div>
+
+
+          
+          <!-- <pre>{{ regimes | json }}</pre> Esto mostrará los datos en formato JSON en la vista -->
+
+          <!-- Régimen -->
+          <div class="mb-3">
+            <label class="form-label">Régimen</label>
+
+            <!---->
+            <select class="form-select" formControlName="regime" [disabled]="!isEditing"
+                    [ngClass]="{'is-invalid': hasError('regime', 'required')}">
+              <option value="" disabled>Seleccione...</option>
+              <option *ngFor="let regime of regimes" [value]="regime.nameRegime">
+                {{ regime.nameRegime }}
+              </option>
+            </select>
+            
+            <div class="invalid-feedback">Seleccione un régimen</div>
+          </div>
+
+          
+        </div>
+
+        <div class="profile-section mb-4">
+          <h5 class="section-title">Configuración del Sistema</h5>
+          
+
+
+          <!-- Roles  -->
+          <div class="mb-3" >
+            <label class="form-label">Roles</label>
+            <div class="roles-container">
+              <!---->
+              <div *ngFor="let role of roles" class="form-check">
+                <input class="form-check-input" type="checkbox" 
+                       [id]="'role-'+role.idRole"
+                       [checked]="hasRole(role.idRole)"
+                       (change)="onRoleChange($event, role.idRole)"
+                       [disabled]="!isEditing">
+                <label class="form-check-label" [for]="'role-'+role.idRole">
+                  {{ role.name }}
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="profile-section">
+          <h5 class="section-title">Seguridad</h5>
+          
+          
+          <!-- Nombre de Usuario -->
+          <div class="mb-3">
+            <label class="form-label">Nombre de Usuario</label>
+            <input type="text" class="form-control" formControlName="username" 
+                   [readOnly]="!isEditing"
+                   [ngClass]="{'is-invalid': hasError('username', 'required')}">
+            <div class="invalid-feedback">El nombre de usuario es obligatorio</div>
+          </div>
+
+                   <!-- Contraseña -->
+                   <div class="mb-3">
+                    <label class="form-label">Contraseña</label>
+                    <input type="password" class="form-control" formControlName="password" 
+                           [readOnly]="!isEditing"
+                           [ngClass]="{'is-invalid': hasError('password', 'required') || hasError('password', 'minlength') || hasError('password', 'pattern')}">
+                    <div class="invalid-feedback">
+                      <div *ngIf="hasError('password', 'required')">La contraseña es obligatoria</div>
+                      <div *ngIf="hasError('password', 'minlength')">Mínimo 8 caracteres</div>
+                      <div *ngIf="hasError('password', 'pattern')">
+                        Debe contener mayúsculas, minúsculas, números y caracteres especiales
+                      </div>
+                    </div>
+                    <small class="text-muted">Dejar en blanco para mantener la actual</small>
+                  </div>
+                  
+        </div>
+      </div>
+    </div>
+
+    <!-- Nota -->
+    <div class="alert alert-info mt-4">
+      <div class="d-flex align-items-center">
+        <i class="fas fa-info-circle me-2"></i>
+        <div>
+          <h6 class="mb-1">Campos obligatorios</h6>
+          <p class="mb-0">Los campos marcados con <span class="text-danger">*</span> son requeridos para facturación electrónica en Colombia.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Botones de Acción -->
+    <div class="d-flex justify-content-between mt-4">
+      <button type="button" class="btn btn-outline-secondary" (click)="cancelEdit()" *ngIf="isEditing">
+        <i class="fas fa-times me-1"></i> Cancelar
+      </button>
+      
+      <button type="submit" class="btn btn-primary ms-auto" 
+              [disabled]="profileForm.formInstance.invalid || isLoading" 
+              *ngIf="isEditing">
+        <span *ngIf="isLoading" class="spinner-border spinner-border-sm me-1"></span>
+        <i class="fas fa-save me-1" *ngIf="!isLoading"></i>
+        {{ isLoading ? 'Guardando...' : 'Guardar Cambios' }}
+      </button>
+    </div>
+  </form>
+</div>

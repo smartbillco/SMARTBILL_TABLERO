@@ -1,0 +1,38 @@
+<div class="modal fade show d-block" tabindex="-1" role="dialog"
+  style="background-color: rgba(0,0,0,0.5)" *ngIf="isOpen">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">
+          <i class="bi bi-paperclip me-2"></i>
+          Adjuntos de {{ correspondence?.filingNumber }}
+        </h5>
+        <button type="button" class="btn-close" (click)="close()"></button>
+      </div>
+      <div class="modal-body">
+        <div *ngIf="!correspondence?.attachments?.length" class="text-center py-4">
+          <i class="bi bi-folder-x fs-1 text-muted"></i>
+          <p class="mt-2">No hay adjuntos para esta correspondencia</p>
+        </div>
+
+        <div *ngIf="correspondence?.attachments?.length" class="attachments-container">
+          <div class="list-group">
+            <a *ngFor="let attachment of correspondence?.attachments" href="javascript:;"
+              class="list-group-item list-group-item-action d-flex align-items-center"
+              (click)="viewAttachment(attachment)">
+              <i [ngClass]="getFileIconClass(attachment.name)" class="me-3 file-icon"></i>
+              <div class="flex-grow-1">
+                <h6 class="mb-1">{{ attachment.name }}</h6>
+                <small *ngIf="attachment.description" class="text-muted">{{ attachment.description }}</small>
+              </div>
+              <i class="bi bi-download ms-2"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="close()">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>

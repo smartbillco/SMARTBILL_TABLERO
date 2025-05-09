@@ -1,0 +1,9 @@
+<div class="navbar-item dropdown">
+  <a href="javascript:;" class="navbar-link dropdown-toggle icon" 
+     [title]="isOnline() ? 'Sincronizado a Internet' : 'Sincronizado al localStore'">
+    <i class="material-icons transition" 
+       [ngClass]="isOnline() ? 'text-success glow' : 'text-danger'">
+      {{ isOnline() ? 'wifi' : 'wifi_off' }}
+    </i>
+  </a>
+</div>

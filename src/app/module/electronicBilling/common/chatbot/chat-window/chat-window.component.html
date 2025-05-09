@@ -1,0 +1,83 @@
+<div class="chat-container" *ngIf="toggleChat">
+  <!-- BEGIN widget-chat -->
+  <div class="widget-chat rounded mb-4" [attr.data-bs-theme]="darkMode ? 'dark' : ''">
+    <!-- BEGIN widget-chat-header -->
+    <div class="widget-chat-header">
+      <div class="widget-chat-header-icon">
+        <img src="/assets/img/logo.png"
+          class="w-30px h-30px text-dark d-flex align-items-center justify-content-center rounded">
+      </div>
+      <div class="widget-chat-header-content">
+        <h4 class="widget-chat-header-title">SmartBill Chatbot</h4>
+        <p class="widget-chat-header-desc">5 Mensajes</p>
+      </div>
+      <div class="">
+        <button (click)="toggleChat = false">✖</button>
+      </div>
+    </div>
+    <!-- END widget-chat-header -->
+
+    <!-- BEGIN widget-chat-body -->
+    <ng-scrollbar class="widget-chat-body" #messagesContainer (drop)="onDrop($event)" (dragover)="onDragOver($event)"
+      (dragleave)="onDragLeave($event)" [ngClass]="{'widget-chat-body--over': isDragOver}">
+
+      <!-- Mensaje de arrastrar y soltar -->
+      <div *ngIf="isDragOver" class="drag-drop-message">
+        <i class="fa fa-cloud-upload fa-3x"></i>
+        <p><strong>Suelta los archivos aquí para subirlos</strong></p>
+      </div>
+
+      <!-- Mensajes del chat -->
+      <div *ngFor="let msg of (messages$ | async)" class="widget-chat-item with-media"
+        [ngClass]="msg.sender === 'user' ? 'start' : 'end'">
+        <div class="widget-chat-media">
+          <img *ngIf="msg.sender === 'user'" [src]="msg.userPhoto">
+          <i *ngIf="msg.sender === 'bot'" class="material-icons" style="font-size: 48px; color: #007bff;">smart_toy</i>
+        </div>
+        <div class="widget-chat-info">
+          <div class="widget-chat-info-container">
+            <div class="widget-chat-name text-indigo" *ngIf="msg.sender === 'user'">{{ msg.userName }}</div>
+            <div *ngIf="!msg.audioUrl" class="widget-chat-message">{{ msg.text }}</div>
+            <div *ngIf="msg.audioUrl">
+              🎤 <strong>Audio enviado</strong>
+              <audio controls>
+                <source [src]="msg.audioUrl" type="audio/wav">
+                Tu navegador no soporta audio.
+              </audio>
+            </div>
+            <div class="widget-chat-time">{{ msg.timestamp | date:'shortTime' }}</div>
+          </div>
+        </div>
+      </div>
+    </ng-scrollbar>
+    <!-- END widget-chat-body -->
+
+    <!-- BEGIN widget-input -->
+    <div class="widget-input">
+      <div class="widget-input-container">
+
+        <div class="widget-input-icon">
+          <div class="file-drop-area" (drop)="onDrop($event)" (dragover)="onDragOver($event)"
+            (dragleave)="onDragLeave($event)">
+          </div>
+          <input type="file" multiple (change)="onFileSelected($event)" #fileInput style="display: none;" />
+          <a href="javascript:;" class="text-gray-500" (click)="fileInput.click()">
+            <i class="fa fa-paperclip"></i>
+          </a>
+        </div>
+
+        <div class="widget-input-box">
+          <input type="text" [(ngModel)]="newMessage" (keyup.enter)="sendMessage()" placeholder="Escribe un mensaje"
+            class="form-control" />
+        </div>
+        <button hidden (click)="sendMessage()" class="send-button">Enviar</button>
+        <div class="widget-input-icon">
+          <a href="javascript:;" (click)="toggleRecording()" class="text-gray-500">
+            <i class="fa" [ngClass]="isRecording ? 'fa-stop-circle text-danger' : 'fa-microphone'"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+    <!-- END widget-input -->
+  </div>
+</div>

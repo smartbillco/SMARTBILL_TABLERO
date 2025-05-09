@@ -1,0 +1,78 @@
+.pdf-reader-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .file-input-container {
+    margin: 20px 0;
+  }
+  
+  .file-input-label {
+    display: inline-block;
+    padding: 10px 15px;
+    background-color: #0078d4;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .file-input-label:hover {
+    background-color: #106ebe;
+  }
+  
+  .file-input {
+    display: none;
+  }
+  
+  .error-message {
+    color: #d83b01;
+    margin: 15px 0;
+    padding: 10px;
+    background-color: #fde7e9;
+    border-radius: 4px;
+  }
+  
+  .results-container {
+    display: flex;
+    gap: 30px;
+    margin-top: 20px;
+  }
+  
+  .extracted-fields, .xml-preview {
+    flex: 1;
+  }
+  
+  .field {
+    margin-bottom: 10px;
+  }
+  
+  .field-label {
+    font-weight: bold;
+    display: inline-block;
+    min-width: 150px;
+  }
+  
+  pre {
+    background-color: #f5f5f5;
+    padding: 15px;
+    border-radius: 4px;
+    overflow-x: auto;
+    max-height: 400px;
+  }
+  
+  .download-button {
+    margin-top: 10px;
+    padding: 8px 15px;
+    background-color: #107c10;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .download-button:hover {
+    background-color: #0e700e;
+  }

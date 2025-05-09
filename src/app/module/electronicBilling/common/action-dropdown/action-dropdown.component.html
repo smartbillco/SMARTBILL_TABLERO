@@ -1,0 +1,21 @@
+<div class="dropdown">
+    <button class="btn btn-secondary d-flex align-items-center w-100 w-md-auto" type="button"
+      id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+      <i [ngClass]="getActionIcon()" class="me-2"></i>
+      <span class="me-2">{{ getActionLabel() }}</span>
+      <i class="fas fa-chevron-down"></i>
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <li>
+        <a class="dropdown-item d-flex align-items-center" (click)="setAction('compra')">
+          <i class="fas fa-shopping-cart me-2"></i> Compra
+        </a>
+      </li>
+      <li>
+        <a class="dropdown-item d-flex align-items-center" (click)="setAction('venta')">
+          <i class="fas fa-tag me-2"></i> Venta
+        </a>
+      </li>
+    </ul>
+  </div>
+  

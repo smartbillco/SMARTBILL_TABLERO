@@ -1,0 +1,15 @@
+<div class="container" *ngIf="isTokenValid">
+  <h2>Cambiar contraseña</h2>
+  <form (ngSubmit)="resetPassword(newPassword.value)">
+    <div>
+      <label for="newPassword">Nueva contraseña:</label>
+      <input type="password" id="newPassword" #newPassword required placeholder="Nueva contraseña" />
+    </div>
+    <button type="submit">Restablecer contraseña</button>
+  </form>
+</div>
+
+<div class="container" *ngIf="!isTokenValid">
+  <p class="invalid-token-message">El token es inválido o ha expirado. Por favor, solicita un nuevo enlace de restablecimiento.</p>
+  <button type="button" (click)="router.navigate(['/forgot'])">Volver a solicitar enlace</button>
+</div>

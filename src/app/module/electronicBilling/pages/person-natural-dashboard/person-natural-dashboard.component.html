@@ -1,0 +1,161 @@
+<div id="container">
+    <!-- Ruta de navegación (breadcrumb) -->
+    <ol class="breadcrumb float-xl-end">
+        <!-- Botón para descargar las gráficas en PDF -->
+        <a href="javascript:;" (click)="downloadChartsAsPDF()" class="btn btn-sm btn-outline-primary mb-10px">
+            <i class="fa fa-print t-plus-1 fa-fw fa-lg"></i> Imprimir
+        </a>
+    </ol>
+
+
+    <!-- Encabezado de la página -->
+    <h1 class="page-header d-flex align-items-center">
+        DASHBOARD/ <small>Persona Natural</small>
+    </h1>
+
+    <!-- Componente de estadísticas generales -->
+    <app-stats [selectedCountry]="selectedCountry" [companiesData]="companiesData"></app-stats>
+
+
+
+    <!-- Fila principal del dashboard -->
+    <div class="row">
+
+        <!-- Panel de filtros y lista de facturas -->
+        <div class="col-xl-5 col-lg-2">
+            <panel title="Filtro de empresas por país" bodyClass="p-2" headerClass="bg-gray-600">
+
+                <!-- Sección de filtros -->
+                <div class="row align-items-center mb-3">
+
+
+                    <!-- Filtro de rango de fechas -->
+                    <div class="col-12 col-md">
+                        <app-date-range-picker [dateselected]="dateselected"
+                            (dateRangeChanged)="onDateRangeChange($event)">
+                        </app-date-range-picker>
+                    </div>
+
+                    <!-- Menú desplegable para seleccionar una acción (compra o venta) -->
+                    <div class="col-12 col-md-auto mt-2 mt-md-0">
+                        <app-action-dropdown></app-action-dropdown>
+                    </div>
+
+                </div>
+
+                <!-- Componente para filtrar facturas por empresa y país -->
+                <app-filter-invoice [dateselectedfilter]="dateselected" (countrySelected)="onCountrySelected($event)"
+                    (companiesDataChanged)="onCompaniesDataUpdated($event)"
+                    (originalCompaniesData)="onOriginalDataReceived($event)">
+                </app-filter-invoice>
+
+                <!-- Lista de facturas por empresa -->
+                <app-company-invoice-list [selectedCountry]="selectedCountry" [companiesData]="companiesData">
+                </app-company-invoice-list>
+
+            </panel>
+        </div>
+
+        <div class="col-lg-7 p-0"> <!-- p-0 para eliminar el padding del contenedor principal -->
+            <div class="widget-chart with-sidebar inverse-mode d-flex flex-column flex-lg-row w-100">
+                <!-- Sección principal de la gráfica billing -->
+                <div class="widget-chart-content bg-white flex-lg-1 d-flex flex-column">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h4 class="chart-title text-black mb-0">
+                            Análisis de empresas en {{ selectedCountry?.countryName ? (selectedCountry.countryName |
+                            uppercase) : 'SIN PAiS SELECCIONADO' }}
+
+                        </h4>
+                        <!-- Botón para mostrar/ocultar Impuestos -->
+                        <button (click)="toggleTaxesVisibility()"
+                            class="btn btn-sm btn-outline-primary rounded-pill shadow">
+                            <i class="fas {{ isTaxesVisible ? 'fa-eye-slash' : 'fa-eye' }} me-2"></i>
+                            {{ isTaxesVisible ? '+' : '+' }}
+                        </button>
+                    </div>
+
+
+
+                    <div class="widget-chart-full-width dark-mode flex-grow-1">
+                        <div class="h-100 pe-3 pt-2">
+                            <!-- Componente de gráfico de facturación -->
+                            <div class="h-100">
+                                <!--
+                                <app-chartbill [selectedCountry]="selectedCountry" [companiesData]="companiesData"></app-chartbill>
+                                -->
+                                <app-chart-patterned [selectedCountry]="selectedCountry"
+                                    [companiesData]="companiesData"></app-chart-patterned>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Inicio seccion para impuestos 
+                <div *ngIf="isTaxesVisible">
+                    <div class="widget-chart-sidebar d-flex flex-column flex-1" [ngClass]="backgroundColorClase">
+                        <h4 class="chart-title text-black">
+                            Impuestos
+                            <small>Impuestos por empresas</small>
+                        </h4>
+                        <div class="flex-grow-1 d-flex align-items-center dark-mode">
+                            <div class="h-100 w-100">
+                                <app-charttax [selectedCountry]="selectedCountry"
+                                    [companiesData]="companiesData"></app-charttax>
+                            </div>
+                        </div>
+                    </div>
+                </div>-->
+                <!-- Fin seccion para impuestos -->
+
+
+            </div>
+        </div>
+
+        <div class="col-xl-4">
+
+            <panel
+                title="IMPUESTOS EN {{ selectedCountry?.countryName ? (selectedCountry.countryName | uppercase) : 'SIN PAÍS SELECCIONADO' }}"
+                headerClass="bg-white text-black">
+                <app-charttax [selectedCountry]="selectedCountry" [companiesData]="companiesData">
+                </app-charttax>
+            </panel>
+
+            <panel title="PARTICIPACION" headerClass="bg-white text-black" noButton="true" >
+                <app-stake [companiesDataStake]="allCompanies"></app-stake>
+            </panel>
+
+            
+        </div>
+
+        <!-- Componente de Stake (posicionamiento en el mundo) -->
+        <div class="col-xl-4">
+            <app-country-positioning></app-country-positioning>
+        </div>
+
+        <!-- Componente para mostrar empresas por país -->
+        <div class="col-xl-4">
+            <app-company-country [selectedCountry]="selectedCountry" [companiesData]="companiesData">
+            </app-company-country>
+        </div>
+
+        <!-- Botón flotante del chatbot -->
+        <app-floating-chatbot-button (toggleChat)="toggleChat()"></app-floating-chatbot-button>
+
+        <!-- Ventana de chat -->
+        <div class="">
+            <app-chat-window [toggleChat]="isChatOpen">
+            </app-chat-window>
+        </div>
+
+        <!-- Sección de tarjetas informativas 
+        <div class="col-xl-2 col-sm-2">
+            <app-card-dashboard></app-card-dashboard>
+        </div>-->
+
+        <!-- Componente para envío de mensajes por WhatsApp (comentado) -->
+        <!-- <app-send-whatsapp></app-send-whatsapp> -->
+        
+    </div>
+</div>

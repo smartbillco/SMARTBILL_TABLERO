@@ -1,0 +1,119 @@
+<!-- Columna izquierda para la lista de archivos -->
+<div class="col-md-13">
+  <!-- Contenedor de entrada de widget -->
+  <div class="widget-map rounded mb-2">
+    <div class="widget-input-container p-0 m-0">
+
+      <app-search-options (optionsChanged)="onSearchOptionsChanged($event)"></app-search-options>
+
+      <div class="widget-input-box p-0">
+        <input type="text" class="form-control form-control-sm" id="companyName" [formControl]="companyNameControl"
+          placeholder="Buscar empresas" style="height: 30px;" (input)="checkInput($event.target.value)">
+
+        <!-- Opciones de autocompletado -->
+        <ul class="list-group"
+          *ngIf="showSuggestions && (filteredCompanies | async)?.length > 0 && companyNameControl.value">
+          <li *ngFor="let company of (filteredCompanies | async)" class="list-group-item"
+            (click)="onCompanySelected(company)">
+            {{ company.registrationName }}
+          </li>
+        </ul>
+      </div>
+
+      <!-- Botón para limpiar filtros -->
+      <div class="widget-input-icon" data-bs-toggle="tooltip" title="Restablecer filtros"
+        *ngIf="companyNameControl.value">
+        <button type="button" class="btn btn-link p-1 clear-filter-btn" (click)="clearFilter()"
+          aria-label="Restablecer todos los filtros">
+          <i class="fa fa-times-circle fs-14"></i>
+        </button>
+      </div>
+
+      <!-- Dropdown para seleccionar el país -->
+      <div class="d-flex align-items-center mx-1">
+        <div class="dropdown">
+          <a href="javascript:;" class="d-flex align-items-center" data-bs-toggle="dropdown" aria-expanded="false">
+            <!-- Ícono y nombre del país seleccionado -->
+            <span [ngClass]="getCountryIconClass(selectedCountryId)" class="me-1"></span>
+            <span class="ms-1">{{ selectedCountryName }}</span>
+            <b class="caret"></b>
+          </a>
+          <ul class="dropdown-menu">
+            <li *ngFor="let country of countries">
+              <a href="javascript:;" (click)="onCountryChange(country)" class="dropdown-item d-flex align-items-center">
+                <span [ngClass]="getCountryIconClass(country.code)" class="me-2"></span>
+                {{ country.name }}
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="widget-input-divider"></div>
+
+      <!-- 
+      <app-file-upload-invoice #fileUploadComponent 
+      (companiesOriginalChanged)="onCompaniesOriginalChanged($event)"
+      (companiesChartChanged)="onCompaniesChartChanged($event)" 
+      (companySelected)="onCompanySelected($event)"
+      [selectedCountry]="selectedCountry"
+      >
+      </app-file-upload-invoice>
+      <app-file-upload-invoice (companiesData)="onFilesProcessed($event)"></app-file-upload-invoice>
+      -->
+      <app-file-upload-invoice [clearDataEvent]="clearDataEvent"
+        (companiesData)="onFilesProcessed($event)"></app-file-upload-invoice>
+
+      <div class="widget-input-divider"></div>
+
+      <!-- Menú de acciones desplegable -->
+      <div class="actions-menu dropdown" data-bs-toggle="tooltip" title="Acciones" style="position: relative;">
+        <a href="javascript:;" class="dropdown-toggle p-1" data-bs-toggle="dropdown" aria-expanded="false"
+          aria-label="Menú de acciones">
+          <i class="fa fa-ellipsis-v fa-lg"></i> </a>
+
+        <div class="dropdown-menu dropdown-menu-end p-2">
+          <!-- Grupo de acciones de exportación -->
+          <div class="dropdown-header">Exportar datos</div>
+          <a href="javascript:;" class="dropdown-item action-item">
+            <i class="fas fa-file-excel text-success me-2"></i>Exportar a Excel
+          </a>
+          <a href="javascript:;" class="dropdown-item action-item">
+            <i class="fas fa-file-pdf text-danger me-2"></i>Exportar a PDF
+          </a>
+
+          <div class="dropdown-divider"></div>
+
+          <!-- Grupo de acciones de mantenimiento -->
+          <div class="dropdown-header">Mantenimiento</div>
+          <a href="javascript:;" class="dropdown-item action-item text-danger" (click)="openConfirmationModal()">
+            <i class="fas fa-trash-alt me-2"></i>Limpiar lista completa
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <!-- Fin del contenedor de entrada de widget -->
+</div>
+
+<!-- Modal de confirmación de Bootstrap -->
+<div class="modal fade" id="filterConfirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="confirmationModalLabel">Confirmación</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ¿Estás seguro de que deseas limpiar la lista de empresas?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" (click)="subscribeToClearCompanyList()"
+          data-bs-dismiss="modal">Confirmar</button>
+      </div>
+    </div>
+  </div>
+</div>

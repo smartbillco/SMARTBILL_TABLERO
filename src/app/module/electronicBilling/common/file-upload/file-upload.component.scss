@@ -1,0 +1,29 @@
+.file-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.file-list::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.file-list::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+.file-list::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+.upload-section, .search-section {
+  transition: all 0.3s ease;
+}
+
+.upload-section:hover, .search-section:hover {
+  box-shadow: 0 0.15rem 0.5rem rgba(0, 0, 0, 0.05);
+}
+
+.card-header {
+  transition: background-color 0.3s ease;
+}

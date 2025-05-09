@@ -1,0 +1,22 @@
+.glow {
+  animation: glowEffect 1s ease-in-out infinite alternate;
+}
+
+@keyframes glowEffect {
+  0% { 
+    text-shadow: 0 0 5px rgba(0, 255, 0, 0.8), 0 0 10px rgba(0, 255, 0, 0.6);
+    transform: scale(1);
+  }
+  50% { 
+    text-shadow: 0 0 15px rgba(0, 255, 0, 1), 0 0 25px rgba(0, 255, 0, 1);
+    transform: scale(1.2); /* Hace el latido más notorio */
+  }
+  100% { 
+    text-shadow: 0 0 5px rgba(0, 255, 0, 0.8), 0 0 10px rgba(0, 255, 0, 0.6);
+    transform: scale(1);
+  }
+}
+
+.transition {
+  transition: all 0.3s ease-in-out; /* Suaviza el cambio de color */
+}

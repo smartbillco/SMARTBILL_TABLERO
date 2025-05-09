@@ -1,0 +1,88 @@
+/* Estilo general del chat */
+.widget-chat {
+  width: 380px;
+  height: 450px; 
+  position: fixed;
+  bottom: 58px;
+  right: 20px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;  
+  z-index: 9999; 
+}
+
+.widget-chat-body {
+  flex: 1;
+}
+
+.widget-chat-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  background: linear-gradient(135deg, #007bff, #0056b3);
+  color: white;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.widget-chat-header-title {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.widget-chat-header-icon img {
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+}
+
+.widget-chat-header button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+
+
+
+
+/* Normal */
+.widget-chat-body {
+  position: relative;
+  transition: background 0.3s ease-in-out, border 0.3s ease-in-out;
+}
+
+/* Cuando el usuario arrastra archivos */
+.widget-chat-body--over {
+  background: rgba(0, 123, 255, 0.15); /* Azul claro */
+  border: 2px dashed #007bff; /* Borde punteado */
+  box-shadow: 0 0 15px rgba(0, 123, 255, 0.5); /* Sombra azul */
+}
+
+/* Mensaje de arrastrar y soltar */
+.drag-drop-message {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  font-size: 18px;
+  color: #007bff;
+  font-weight: bold;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Animación de entrada */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -40%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}

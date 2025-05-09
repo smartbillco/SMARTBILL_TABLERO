@@ -1,0 +1,83 @@
+<!-- BEGIN profile -->
+<div class="profile">
+	<div class="profile-header">
+		<!-- BEGIN profile-header-cover -->
+		<div class="profile-header-cover"></div>
+		<!-- END profile-header-cover -->
+		<!-- BEGIN profile-header-content -->
+		<div class="profile-header-content d-flex align-items-center">
+			<!-- Foto y menú de opciones -->
+			<div class="profile-picture-container me-3">
+				<div class="dropdown">
+
+
+					<img [src]="profileImageUrl" class="profile-picture dropdown-toggle" id="profileDropdown"
+						alt="Foto de perfil" data-bs-toggle="dropdown" aria-expanded="false"
+						(mouseenter)="showOverlay = true" (mouseleave)="showOverlay = false" />
+
+					<div class="overlay" *ngIf="showOverlay">
+						<i class="camera-icon" aria-hidden="true"></i>
+						<span>CAMBIAR FOTO DEL PERFIL</span>
+					</div>
+
+
+					<ul class="dropdown-menu" aria-labelledby="profileDropdown">
+						<li><button class="dropdown-item" (click)="viewPhoto()"><i class="bi bi-eye"></i> Ver
+								foto</button></li>
+						<li><button class="dropdown-item" (click)="takePhoto()"><i class="bi bi-camera"></i> Tomar
+								foto</button></li>
+						<li><button class="dropdown-item" (click)="uploadPhoto()"><i class="bi bi-upload"></i> Cargar
+								foto</button></li>
+						<li><button class="dropdown-item text-danger" (click)="deletePhoto()"><i
+									class="bi bi-trash"></i> Eliminar foto</button></li>
+					</ul>
+				</div>
+			</div>
+
+
+			<!-- Información del usuario al lado de la imagen -->
+			<div class="profile-header-info" *ngIf="userData">
+				<h4 class="mt-0 mb-1">
+					{{ userData.firstName }} {{ userData.secondName || '' }}
+					{{ userData.lastName }} {{ userData.secondLastName || '' }}
+				</h4>
+				<p class="mb-2">{{ userData.username }}</p>
+				<button (click)="toggleEditMode()" class="btn btn-xs btn-yellow">
+					{{ isEditing ? 'Cancelar' : 'Editar Perfil' }}
+				</button>
+			</div>
+
+		</div>
+		<!-- END profile-header-content -->
+
+		<!-- BEGIN profile-header-tab -->
+		<ul class="profile-header-tab nav nav-tabs">
+			<li class="nav-item"><a href="#profile-post" class="nav-link active" data-bs-toggle="tab">PERFIL</a></li>
+			<li class="nav-item"><a href="#profile-about" class="nav-link" data-bs-toggle="tab">CONFIGURACION</a></li>
+		</ul>
+		<!-- END profile-header-tab -->
+	</div>
+</div>
+<!-- END profile -->
+
+
+<!-- BEGIN profile-content -->
+<div class="profile-content">
+	<!-- BEGIN tab-content -->
+	<div class="tab-content p-0">
+		<!-- BEGIN #profile-post tab -->
+		<div class="tab-pane fade show active" id="profile-post">
+			<app-edit-profile [userData]="userData" [isEditing]="isEditing" (profileUpdated)="onProfileUpdated($event)"
+				(cancelled)="onCancelEdit()">
+			</app-edit-profile>
+		</div>
+		<!-- END #profile-post tab -->
+		<!-- BEGIN #profile-about tab -->
+		<div class="tab-pane fade" id="profile-about">
+			<extra-settings-page></extra-settings-page>
+		</div>
+		<!-- END #profile-about tab -->
+	</div>
+	<!-- END tab-content -->
+</div>
+<!-- END profile-content -->

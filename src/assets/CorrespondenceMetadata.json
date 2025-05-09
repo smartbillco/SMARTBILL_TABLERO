@@ -1,0 +1,429 @@
+{
+  "CorrespondenceType": [
+    {
+      "codCorrespondenceType": 1,
+      "descripcion": "Entrante Fisica"
+    },
+    {
+      "codCorrespondenceType": 2,
+      "descripcion": "Entrante Correo"
+    },
+    {
+      "codCorrespondenceType": 3,
+      "descripcion": "Entrante App"
+    },
+    {
+      "codCorrespondenceType": 4,
+      "descripcion": "Saliente"
+    },
+    {
+      "codCorrespondenceType": 5,
+      "descripcion": "Interna"
+    }
+  ],
+
+
+  
+  "DocumentStatus": [
+    {
+      "codDocumentStatus": 1,
+      "descripcion": "Recibido"
+    },
+    {
+      "codDocumentStatus": 2,
+      "descripcion": "Tramitado y archivado"
+    },
+    {
+      "codDocumentStatus": 3,
+      "descripcion": "Archivado"
+    },
+    {
+      "codDocumentStatus": 4,
+      "descripcion": "Respondido"
+    },
+    {
+      "codDocumentStatus": 5,
+      "descripcion": "No Requiere respuesta"
+    },
+    {
+      "codDocumentStatus": 6,
+      "descripcion": "Respondido via Email"
+    },
+    {
+      "codDocumentStatus": 7,
+      "descripcion": "Direccionado para tramite"
+    },
+    {
+      "codDocumentStatus": 8,
+      "descripcion": "Respondido parcialmente"
+    },
+    {
+      "codDocumentStatus": 9,
+      "descripcion": "Redireccionado para respuesta de tercero"
+    },
+    {
+      "codDocumentStatus": 10,
+      "descripcion": "Traslado por competencia"
+    },
+    {
+      "codDocumentStatus": 11,
+      "descripcion": "Proceso iniciado"
+    },
+    {
+      "codDocumentStatus": 12,
+      "descripcion": "Proceso terminado"
+    }
+  ],
+  "CorrespondenceCategory": [
+    {
+      "codCorrespondenceCategory": "00",
+      "descripcion": "Soporte técnico",
+      "expiresInDays": 15
+    },
+    {
+      "codCorrespondenceCategory": "01",
+      "descripcion": "Peticiones",
+      "expiresInDays": 15
+    },
+    {
+      "codCorrespondenceCategory": "01.03",
+      "descripcion": "Interés particular y general",
+      "expiresInDays": 15
+    },
+    {
+      "codCorrespondenceCategory": "01.05",
+      "descripcion": "Información",
+      "expiresInDays": 10
+    },
+    {
+      "codCorrespondenceCategory": "02",
+      "descripcion": "Quejas",
+      "expiresInDays": 15
+    },
+    {
+      "codCorrespondenceCategory": "03",
+      "descripcion": "Reclamos",
+      "expiresInDays": 15
+    },
+    {
+      "codCorrespondenceCategory": "04",
+      "descripcion": "Cuenta de cobros",
+      "expiresInDays": 15
+    },
+    {
+      "codCorrespondenceCategory": "05",
+      "descripcion": "Citaciones",
+      "expiresInDays": 15
+    },
+    {
+      "codCorrespondenceCategory": "06",
+      "descripcion": "Respuestas",
+      "expiresInDays": 15
+    },
+    {
+      "codCorrespondenceCategory": "07",
+      "descripcion": "Documentos varios",
+      "expiresInDays": 15
+    },
+    {
+      "codCorrespondenceCategory": "08",
+      "descripcion": "Informes",
+      "expiresInDays": 15
+    },
+    {
+      "codCorrespondenceCategory": "09",
+      "descripcion": "Solicitudes",
+      "expiresInDays": 15
+    },
+    {
+      "codCorrespondenceCategory": "09.01",
+      "descripcion": "Entes de control",
+      "expiresInDays": 15
+    },
+    {
+      "codCorrespondenceCategory": "09.01.01",
+      "descripcion": "Procuraduría",
+      "expiresInDays": 15
+    },
+    {
+      "codCorrespondenceCategory": "09.01.02",
+      "descripcion": "Fiscalía",
+      "expiresInDays": 15
+    },
+    {
+      "codCorrespondenceCategory": "09.01.03",
+      "descripcion": "Contraloría",
+      "expiresInDays": 15
+    },
+    {
+      "codCorrespondenceCategory": "09.01.04",
+      "descripcion": "DIAN",
+      "expiresInDays": 15
+    },
+    {
+      "codCorrespondenceCategory": "09.01.05",
+      "descripcion": "Personería",
+      "expiresInDays": 15
+    },
+    {
+      "codCorrespondenceCategory": "09.02",
+      "descripcion": "Demandas",
+      "expiresInDays": 15
+    },
+    {
+      "codCorrespondenceCategory": "09.02.01",
+      "descripcion": "Tutelas",
+      "expiresInDays": 15
+    },
+    {
+      "codCorrespondenceCategory": "09.02.02",
+      "descripcion": "Administrativas",
+      "expiresInDays": 15
+    },
+    {
+      "codCorrespondenceCategory": "09.02.03",
+      "descripcion": "Civiles",
+      "expiresInDays": 15
+    },
+    {
+      "codCorrespondenceCategory": "09.02.04",
+      "descripcion": "Laborales",
+      "expiresInDays": 15
+    },
+    {
+      "codCorrespondenceCategory": "10",
+      "descripcion": "Redireccionar",
+      "expiresInDays": 15
+    },
+    {
+      "codCorrespondenceCategory": "11",
+      "descripcion": "Facturas",
+      "expiresInDays": 15
+    },
+    {
+      "codCorrespondenceCategory": "12",
+      "descripcion": "A terceros",
+      "expiresInDays": 15
+    },
+    {
+      "codCorrespondenceCategory": "13",
+      "descripcion": "Informativo",
+      "expiresInDays": 15
+    },
+    {
+      "codCorrespondenceCategory": "14",
+      "descripcion": "Todas",
+      "expiresInDays": 15
+    },
+    {
+      "codCorrespondenceCategory": "15",
+      "descripcion": "Sugerencias",
+      "expiresInDays": 15
+    },
+    {
+      "codCorrespondenceCategory": "16",
+      "descripcion": "Convenio",
+      "expiresInDays": 15
+    },
+    {
+      "codCorrespondenceCategory": "17",
+      "descripcion": "Invitación",
+      "expiresInDays": 15
+    },
+    {
+      "codCorrespondenceCategory": "18",
+      "descripcion": "Subasta",
+      "expiresInDays": 15
+    },
+    {
+      "codCorrespondenceCategory": "19",
+      "descripcion": "Legalización de predio",
+      "expiresInDays": 15
+    },
+    {
+      "codCorrespondenceCategory": "20",
+      "descripcion": "Cotización",
+      "expiresInDays": 15
+    },
+    {
+      "codCorrespondenceCategory": "21",
+      "descripcion": "Intención de compra",
+      "expiresInDays": 15
+    },
+    {
+      "codCorrespondenceCategory": "22",
+      "descripcion": "Licitación",
+      "expiresInDays": 15
+    },
+    {
+      "codCorrespondenceCategory": "23",
+      "descripcion": "Selección abreviada",
+      "expiresInDays": 15
+    },
+    {
+      "codCorrespondenceCategory": "27",
+      "descripcion": "Invitación pública",
+      "expiresInDays": 15
+    },
+    {
+      "codCorrespondenceCategory": "28",
+      "descripcion": "SIGOB",
+      "expiresInDays": 15
+    },
+    {
+      "codCorrespondenceCategory": "30",
+      "descripcion": "Urgente de inmediato",
+      "expiresInDays": 1
+    },
+    {
+      "codCorrespondenceCategory": "31",
+      "descripcion": "Formulación de consultas",
+      "expiresInDays": 15
+    },
+    {
+      "codCorrespondenceCategory": "32",
+      "descripcion": "Solicitud copias simples",
+      "expiresInDays": 15
+    },
+    {
+      "codCorrespondenceCategory": "33",
+      "descripcion": "Solicitud organismos de control",
+      "expiresInDays": 15
+    }
+  ],
+  "Dependence": [
+    {
+      "codDependence": "01",
+      "descripcion": "Gerencia"
+    },
+    {
+      "codDependence": "02",
+      "descripcion": "Juridica"
+    },
+    {
+      "codDependence": "03",
+      "descripcion": "Control Interno"
+    },
+    {
+      "codDependence": "04",
+      "descripcion": "Recursos Humanos"
+    },
+    {
+      "codDependence": "05",
+      "descripcion": "Contabilidad"
+    },
+    {
+      "codDependence": "06",
+      "descripcion": "Tecnica"
+    },
+    {
+      "codDependence": "07",
+      "descripcion": "Presupuesto"
+    },
+    {
+      "codDependence": "08",
+      "descripcion": "Sistemas"
+    },
+    {
+      "codDependence": "09",
+      "descripcion": "Otros"
+    },
+    {
+      "codDependence": "10",
+      "descripcion": "Gerente"
+    },
+    {
+      "codDependence": "11",
+      "descripcion": "Asesor Financiero"
+    },
+    {
+      "codDependence": "12",
+      "descripcion": "Asesor Gerencia"
+    },
+    {
+      "codDependence": "13",
+      "descripcion": "Asesor Juridico"
+    },
+    {
+      "codDependence": "14",
+      "descripcion": "Secretaria De Gerencia"
+    },
+    {
+      "codDependence": "15",
+      "descripcion": "Secretaria Juridica"
+    },
+    {
+      "codDependence": "16",
+      "descripcion": "Secretaria Administrativa"
+    },
+    {
+      "codDependence": "17",
+      "descripcion": "Ingenieros"
+    },
+    {
+      "codDependence": "18",
+      "descripcion": "Subtenico"
+    },
+    {
+      "codDependence": "19",
+      "descripcion": "Subfinanciera"
+    },
+    {
+      "codDependence": "20",
+      "descripcion": "Sistemas"
+    },
+    {
+      "codDependence": "21",
+      "descripcion": "Contabilidad"
+    },
+    {
+      "codDependence": "22",
+      "descripcion": "Presupuesto"
+    },
+    {
+      "codDependence": "23",
+      "descripcion": "Tesoreria"
+    },
+    {
+      "codDependence": "24",
+      "descripcion": "Archivo"
+    }
+  ],
+  "Senders": [
+    {
+      "idUser": 1,
+      "userName": "jperez",
+      "firstName": "Juan",
+      "lastName": "Pérez",
+      "documentType": "DNI",
+      "documentNumber": "12345678",
+      "phoneNumber": "3001234567",
+      "email": "juan.perez@example.com",
+      "address": "Calle 123, Ciudad",
+      "enabled": true
+    },
+    {
+      "idUser": 2,
+      "userName": "mgomez",
+      "firstName": "María",
+      "lastName": "Gómez",
+      "documentType": "Cédula",
+      "documentNumber": "87654321",
+      "phoneNumber": "3007654321",
+      "email": "maria.gomez@example.com",
+      "address": "Avenida 456, Ciudad",
+      "enabled": true
+    },
+    {
+      "idUser": 3,
+      "userName": "jmartinez",
+      "firstName": "Javier",
+      "lastName": "Martínez",
+      "documentType": "Cédula",
+      "documentNumber": "55667788",
+      "phoneNumber": "3005566778",
+      "email": "javier.martinez@example.com",
+      "address": "Carrera 5 # 10-20, Ciudad"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+<button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Menu button">
+    <mat-icon>{{icon}}</mat-icon>
+  </button>
+  
+  <!-- Menú principal -->
+  <mat-menu #menu="matMenu">
+    <ng-container *ngFor="let option of menuOptions">
+      <!-- Si hay submenú, lo mostramos -->
+      <button mat-menu-item *ngIf="option.submenu" [matMenuTriggerFor]="subMenu">
+        <mat-icon>{{ option.icon }}</mat-icon>
+        <span>{{ option.label }}</span>
+      </button>
+  
+      <!-- Si no hay submenú, ejecuta acción o navega a la ruta -->
+      <button mat-menu-item *ngIf="!option.submenu" (click)="option.route ? navigateToRoute(option.route) : executeAction(option.action)">
+        <mat-icon>{{ option.icon }}</mat-icon>
+        <span>{{ option.label }}</span>
+      </button>
+  
+      <!-- Submenú -->
+      <mat-menu #subMenu="matMenu">
+        <ng-container *ngFor="let subOption of option.submenu">
+          <button mat-menu-item (click)="subOption.route ? navigateToRoute(subOption.route) : executeAction(subOption.action)">
+            <mat-icon>{{ subOption.icon }}</mat-icon>
+            <span>{{ subOption.label }}</span>
+          </button>
+        </ng-container>
+      </mat-menu>
+    </ng-container>
+  </mat-menu>

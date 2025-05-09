@@ -1,0 +1,178 @@
+<!-- BEGIN register -->
+<div class="register register-with-news-feed">
+	<!-- BEGIN news-feed -->
+	<div class="news-feed">
+		<div class="news-image" style="background-image: url(assets/img/login-bg/login-bg-11.jpg)"></div>
+		<div class="news-caption">
+			<h4 class="caption-title"><b>Smartbill</b> Admin App</h4>
+			<p>
+				Utilizas SmartBill Admin para gestionar tus facturas electrónicas.
+			</p>
+		</div>
+	</div>
+	<!-- END news-feed -->
+
+	<!-- BEGIN register-container -->
+	<div class="register-container">
+		<!-- BEGIN login-header -->
+		<div class="login-header mb-30px">
+			<div class="brand">
+				<div class="d-flex align-items-center">
+					<span class="logo"></span>
+					<b>SmartBill</b> Admin
+				</div>
+				<small>Manejo facturación electrónica</small>
+			</div>
+			<div class="icon">
+				<i class="fa fa-sign-in-alt"></i>
+			</div>
+		</div>
+		<!-- END login-header -->
+
+		<!-- BEGIN register-content -->
+		<div class="register-content">
+			<form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="fs-13px">
+				<div class="row">
+					<!-- Columna 1 -->
+					<div class="col-md-6">
+						<div class="form-floating mb-15px">
+							<input type="text" id="username" formControlName="username"
+								class="form-control h-45px fs-13px" placeholder="Nombre de Usuario">
+							<label for="userName">Nombre de Usuario</label>
+						</div>
+
+						<div class="form-floating mb-15px">
+							<input type="text" id="firstName" formControlName="firstName"
+								class="form-control h-45px fs-13px" placeholder="Primer Nombre">
+							<label for="firstName">Primer Nombre</label>
+						</div>
+
+						<div class="form-floating mb-15px">
+							<input type="text" id="secondName" formControlName="secondName"
+								class="form-control h-45px fs-13px" placeholder="Segundo Nombre">
+							<label for="secondName">Segundo Nombre</label>
+						</div>
+
+						<div class="form-floating mb-15px">
+							<input type="text" id="lastName" formControlName="lastName"
+								class="form-control h-45px fs-13px" placeholder="Apellido Paterno">
+							<label for="lastName">Apellido Paterno</label>
+						</div>
+
+						<div class="form-floating mb-15px">
+							<input type="text" id="secondLastName" formControlName="secondLastName"
+								class="form-control h-45px fs-13px" placeholder="Apellido Materno">
+							<label for="secondLastName">Apellido Materno</label>
+						</div>
+
+						<div class="form-floating mb-15px">
+							<input type="text" id="address" formControlName="address"
+								class="form-control h-45px fs-13px" placeholder="Dirección">
+							<label for="address">Dirección</label>
+						</div>
+
+					</div>
+
+					<!-- Columna 2 -->
+					<div class="col-md-6">
+
+
+						<div class="form-floating mb-15px">
+							<input type="password" id="password" formControlName="password"
+								class="form-control h-45px fs-13px" placeholder="Contraseña">
+							<label for="password">Contraseña</label>
+						</div>
+
+						<div class="form-floating mb-15px">
+							<select id="documentType" formControlName="documentType"
+								class="form-control h-45px fs-13px">
+								<option value="" disabled selected>Seleccione un tipo de documento</option>
+								<option *ngFor="let type of doctypes" [value]="type.nameDocumentType">
+									{{ type.nameDocumentType }}
+								</option>
+							</select>
+							<label for="documentType">Tipo de Documento</label>
+						</div>
+
+						<div class="form-floating mb-15px">
+							<input type="text" id="documentNumber" formControlName="documentNumber"
+								class="form-control h-45px fs-13px" placeholder="Número de Documento">
+							<label for="documentNumber">Número de Documento</label>
+						</div>
+
+						<!--
+						<div class="form-floating mb-15px">
+							<select id="regime" formControlName="regime" class="form-control h-45px fs-13px">
+								<option [ngValue]="null" disabled>Seleccione un régimen</option>
+								<option *ngFor="let r of regimes" [ngValue]="r">
+									{{ r.nameRegime }}
+								</option>
+							</select>
+							<label for="regime">Régimen</label>
+						</div>-->
+						<div class="form-floating mb-15px">
+
+							<select formControlName="regime" required class="form-control h-45px fs-13px">
+								<option [value]="null" disabled selected>Seleccione un régimen</option>
+								<option *ngFor="let regime of regimes" [value]="regime.idRegime">
+									{{ regime.nameRegime }}
+								</option>
+							</select>
+						</div>
+
+
+						<div class="form-floating mb-15px">
+							<input type="text" id="phoneNumber" formControlName="phoneNumber"
+								class="form-control h-45px fs-13px" placeholder="Número de Teléfono">
+							<label for="phoneNumber">Número de Teléfono</label>
+						</div>
+
+
+						<div class="form-floating mb-15px">
+							<input type="email" id="email" formControlName="email" class="form-control h-45px fs-13px"
+								placeholder="Correo Electrónico">
+							<label for="email">Correo Electrónico</label>
+						</div>
+					</div>
+				</div>
+
+				<!--
+				<div *ngFor="let role of roles" class="form-check">
+					<input class="form-check-input" type="checkbox" [value]="role.idRole "
+						(change)="onCheckboxChange($any($event).target.checked, role.idRole )"
+						id="role-{{role.idRole }}">
+					<label class="form-check-label" for="role-{{role.idRole }}">
+						{{role.name}} (ID: {{role.idRole }})
+					</label>
+				</div>
+				-->
+
+				<!-- Fila adicional -->
+				<div class="row">
+
+
+
+					<input type="file" (change)="onFileSelected($event)" accept="image/*" />
+
+				</div>
+
+				<!-- Checkbox de términos -->
+				<div class="form-check mb-15px">
+					<input type="checkbox" id="acceptTerms" formControlName="acceptTerms" class="form-check-input">
+					<label for="acceptTerms" class="form-check-label">Acepto los <a href="#">términos y
+							condiciones</a></label>
+				</div>
+
+				<!-- Botón de registro -->
+				<div class="d-flex justify-content-between align-items-center">
+					<button type="submit" [disabled]="isSubmitting"
+						class="btn btn-outline-primary w-100px me-10px">Registrar</button>
+					<a routerLink="/login" class="btn btn-default w-100px">Cancelar</a>
+				</div>
+			</form>
+		</div>
+		<!-- END register-content -->
+	</div>
+	<!-- END register-container -->
+</div>
+<!-- END register -->

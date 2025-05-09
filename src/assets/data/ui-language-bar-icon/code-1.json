@@ -1,0 +1,11 @@
+
+{
+    "countries": [
+      { "code": "co", "name": "Colombia", "icon": "fi-fi-co" },
+      { "code": "pa", "name": "Panama", "icon": "fi-fi-pa" },
+      { "code": "pe", "name": "Peru", "icon": "fi-fi-pe" },
+      { "code": "us", "name": "Estados Unidos", "icon": "fi-fi-us" },
+      { "code": "ec", "name": "Ecuador", "icon": "fi-fi-ec" },
+      { "code": "cl", "name": "Chile", "icon": "fi-fi-cl" }
+    ]
+}

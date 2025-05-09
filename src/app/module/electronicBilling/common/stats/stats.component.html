@@ -1,0 +1,111 @@
+<!--
+<div class="mb-10px mt-10px fs-10px">
+	<a href="javascript:;" data-bs-toggle="modal" data-bs-target="#modalWidgetStat" class="float-end text-gray-600 text-decoration-none me-3px fw-bold">source code</a>
+	<b class="text-dark">WIDGET STAT</b>
+</div>
+-->
+
+<!-- BEGIN row -->
+<div class="row gx-2 mb-20px">
+	<!-- BEGIN col-4 -->
+	<div class="col-lg-3 col-sm-6">
+		<div class="widget widget-stats mb-7px" [ngClass]="backgroundColorClase">
+			<div class="stats-icon stats-icon-lg"><i class="fa fa-globe fa-fw"></i></div>
+			<div class="stats-content">
+				<div class="stats-title" [ngStyle]="{'color': textoColorClase}">COMPRAS</div>
+
+				<div class="stats-number" [ngStyle]="{'color': textoColorClase}">
+					<span class="me-1">{{ monedaObjetivo }}</span>
+					<span class="fs-4">{{ symbol }}&nbsp;{{ totalFacturadoConvertido | number:'1.2-2' }}</span>
+				</div>
+
+				<div class="stats-progress progress">
+					<div class="progress-bar" style="width: 70.1%;"></div>
+				</div>
+				
+				<div class="stats-desc" [ngStyle]="{'color': textoColorClase}">
+					<!--Better than last week (70.1%)-->
+				</div>
+				<div class="stats-link">
+					<a href="javascript:;">Ver Detalle <i class="fa fa-arrow-alt-circle-right"></i></a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- END col-4 -->
+	<!-- BEGIN col-4 -->
+	<div class="col-lg-3 col-sm-6">
+		<div class="widget widget-stats mb-7px" [ngClass]="backgroundColorClase">
+			<div class="stats-icon stats-icon-lg"><i class="fa fa-dollar-sign fa-fw"></i></div>
+			<div class="stats-content">
+				<div class="stats-title" [ngStyle]="{'color': textoColorClase}">IMPUESTO {{NombreImpuestosprincipal}}
+				</div>
+
+				<div class="stats-number" [ngStyle]="{'color': textoColorClase}">
+				<span class="me-1">{{ monedaObjetivo }}</span>
+				<span class="fs-4">{{ symbol }}&nbsp;{{ totalImpuestosPrincipal | number:'1.2-2' }}</span>
+			
+			
+			</div>
+
+				<div class="stats-progress progress">
+					<div class="progress-bar" style="width: 40.5%;"></div>
+				</div>
+				<div class="stats-desc" [ngStyle]="{'color': textoColorClase}">					<!--Better than last week (70.1%)-->
+				</div>
+				<div class="stats-link">
+					<a href="javascript:;">Ver Detalle <i class="fa fa-arrow-alt-circle-right"></i></a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- END col-4 -->
+	<!-- BEGIN col-4 -->
+	<div class="col-lg-3 col-sm-6">
+		<div class="widget widget-stats mb-7px" [ngClass]="backgroundColorClase">
+			<div class="stats-icon stats-icon-lg"><i class="fa fa-archive fa-fw"></i></div>
+			<div class="stats-content">
+				<div class="stats-title" [ngStyle]="{'color': textoColorClase}">IMPUESTOS ADICIONAL</div>
+
+				<div class="stats-number" [ngStyle]="{'color': textoColorClase}">
+					<span class="me-1">{{ monedaObjetivo }}</span>
+					<span class="fs-4">{{ symbol }}&nbsp;{{ totalImpuestosOtros | number:'1.2-2' }}</span>
+				</div>
+
+				<div class="stats-progress progress">
+					<div class="progress-bar" style="width: 76.3%;"></div>
+				</div>
+
+				<div class="stats-desc" [ngStyle]="{'color': textoColorClase}">					<!--Better than last week (70.1%)-->
+				</div>
+				<div class="stats-link">
+					<a href="javascript:;">Ver Detalle <i class="fa fa-arrow-alt-circle-right"></i></a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- END col-4 -->
+	<!-- BEGIN col-4 -->
+	<div class="col-lg-3 col-sm-6">
+		<div class="widget widget-stats mb-7px" [ngClass]="backgroundColorClase">
+			<div class="stats-icon stats-icon-lg"><i class="fa fa-comment-alt fa-fw"></i></div>
+			<div class="stats-content">
+				<div class="stats-title" [ngStyle]="{'color': textoColorClase}">TOTAL IMPUESTO</div>
+
+				<div class="stats-number" [ngStyle]="{'color': textoColorClase}">
+					<span class="me-1">{{ monedaObjetivo }}</span>
+					<span class="fs-4">{{ symbol }}&nbsp;{{ granTotal | number:'1.2-2' }}</span>
+				</div>
+
+				<div class="stats-progress progress">
+					<div class="progress-bar" style="width: 54.9%;"></div>
+				</div>
+				<div class="stats-desc" [ngStyle]="{'color': textoColorClase}">					<!--Better than last week (70.1%)-->
+				</div>
+				<div class="stats-link">
+					<a href="javascript:;">Ver Detalle <i class="fa fa-arrow-alt-circle-right"></i></a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- END col-4 -->

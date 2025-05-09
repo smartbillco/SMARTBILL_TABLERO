@@ -1,0 +1,17 @@
+.logo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .logo-container img {
+    width: 35px;
+    height: 35px;
+  }
+  
+  .logo-container div {
+    margin-top: 8px;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+  }

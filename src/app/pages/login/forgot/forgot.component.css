@@ -1,0 +1,159 @@
+/* Estilos globales */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f7fa;
+  color: #333;
+}
+
+/* Contenedor principal centrado */
+.container {
+  width: 100%;
+  margin-top: 300px;
+  max-width: 400px;
+  padding: 2rem;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  transform: scale(0.95);
+  animation: fadeInScale 0.6s forwards;
+}
+
+/* Contenedor del body para alinear verticalmente */
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Ocupa toda la altura de la pantalla */
+  margin: 0;
+}
+h2,
+h3 {
+  color: #4a90e2;
+  font-weight: bold;
+  text-align: center;
+}
+
+form {
+  background-color: #fff;
+  padding: 1rem 0;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  box-sizing: border-box;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: slideIn 0.4s ease-out forwards;
+}
+
+button {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 1rem;
+  transition: background-color 0.3s ease;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: slideIn 0.6s ease-out forwards;
+  animation-delay: 0.2s;
+}
+
+button:hover {
+  background-color: #357ab9;
+}
+
+button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+/* Estilos para los mensajes */
+.success-message {
+  color: #28a745;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.error-message {
+  color: #dc3545;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+/* Estilo para el temporizador */
+.timer {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 18px;
+  color: #e74c3c;
+  font-weight: bold;
+}
+
+.timer span {
+  font-size: 20px;
+  color: #2980b9;
+}
+
+/* Animaciones */
+@keyframes fadeInScale {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  form {
+    padding: 1.5rem;
+  }
+
+  input,
+  select {
+    font-size: 0.9rem;
+  }
+
+  button {
+    font-size: 0.9rem;
+  }
+}

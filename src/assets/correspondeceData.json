@@ -1,0 +1,178 @@
+{
+  "Correspondence": [
+    {
+      "filingNumber": "RAD-2024-000001",
+      "filingDate": "2024-03-25",
+      "documentDate": "2024-03-25",
+      "externalFiling": "",
+      "correspondenceType": {
+        "codCorrespondenceType": 1,
+        "descripcion": "Entrante Fisica"
+      },
+      "documentStatus": {
+        "codDocumentStatus": 1,
+        "descripcion": "Recibido"
+      },
+      "CorrespondenceCategory": {
+        "codCorrespondenceCategory": "02",
+        "descripcion": "Quejas",
+        "expiresInDays": 15
+      },
+      "dependence": {
+        "codDependence": "06",
+        "descripcion": "Tecnica"
+      },
+      "subject": "Demora en reparación de acueducto",
+      "text": "Texto 1",
+      "senders": {
+        "idUser": 1
+      },
+      "attachments": [
+        {
+          "id": "adj-123",
+          "correspondenceId": "RAD-2024-000001",
+          "name": "documento-soporte.pdf",
+          "description": "Factura de compra",
+          "fileUrl": "https://ejemplo.com/uploads/documento-soporte.pdf"
+        },
+        {
+          "id": "adj-124",
+          "correspondenceId": "RAD-2024-000001",
+          "name": "foto-evidencia.jpg",
+          "description": "Foto del daño reportado",
+          "fileUrl": "https://ejemplo.com/uploads/foto-evidencia.jpg"
+        }
+      ]
+    },
+    {
+      "filingNumber": "RAD-2024-000002",
+      "filingDate": "2024-03-26",
+      "documentDate": "2024-03-25",
+      "externalFiling": "EXT-2024-00123",
+      "correspondenceType": {
+        "codCorrespondenceType": 2,
+        "descripcion": "Entrante Correo"
+      },
+      "documentStatus": {
+        "codDocumentStatus": 7,
+        "descripcion": "Direccionado para tramite"
+      },
+      "CorrespondenceCategory": {
+        "codCorrespondenceCategory": "09.02.01",
+        "descripcion": "Tutelas",
+        "expiresInDays": 15
+      },
+      "dependence": {
+        "codDependence": "02",
+        "descripcion": "Juridica"
+      },
+      "subject": "Tutela por derecho de petición",
+      "text": "Texto 2",
+      "senders": {
+        "idUser": 2
+      },
+      "attachments": []
+    },
+    {
+      "filingNumber": "RAD-2024-000003",
+      "filingDate": "2024-03-27",
+      "documentDate": "2024-03-26",
+      "externalFiling": "",
+      "correspondenceType": {
+        "codCorrespondenceType": 3,
+        "descripcion": "Entrante App"
+      },
+      "documentStatus": {
+        "codDocumentStatus": 1,
+        "descripcion": "Recibido"
+      },
+      "CorrespondenceCategory": {
+        "codCorrespondenceCategory": "01.05",
+        "descripcion": "Información",
+        "expiresInDays": 10
+      },
+      "dependence": {
+        "codDependence": "06",
+        "descripcion": "Tecnica"
+      },
+      "subject": "Consulta sobre proyectos de infraestructura",
+      "text": "Texto 3",
+      "senders": {
+        "idUser": 3
+      },
+      "attachments": [
+        {
+          "id": "adj-125",
+          "correspondenceId": "RAD-2024-000003",
+          "name": "plano-proyecto.pdf",
+          "fileUrl": "https://ejemplo.com/uploads/plano-proyecto.pdf"
+        }
+      ]
+    },
+    {
+      "filingNumber": "RAD-2025-000002",
+      "filingDate": "2025-03-26",
+      "documentDate": "2024-03-25",
+      "externalFiling": "EXT-2024-00123",
+      "correspondenceType": {
+        "codCorrespondenceType": 2,
+        "descripcion": "Entrante Correo"
+      },
+      "documentStatus": {
+        "codDocumentStatus": 7,
+        "descripcion": "Direccionado para tramite"
+      },
+      "CorrespondenceCategory": {
+        "codCorrespondenceCategory": "09.02.01",
+        "descripcion": "Tutelas",
+        "expiresInDays": 15
+      },
+      "dependence": {
+        "codDependence": "02",
+        "descripcion": "Juridica"
+      },
+      "subject": "Tutela por derecho de petición",
+      "text": "Texto 2",
+      "senders": {
+        "idUser": 2
+      },
+      "attachments": [
+        {
+          "name": "Resolucion_1234.pdf",
+          "description": "Resolución de tutela",
+          "size": "2MB"
+        },
+        {
+          "name": "Evidencia_Foto1.jpg",
+          "description": "Fotografía del caso",
+          "size": "1.5MB"
+        },
+        {
+          "name": "Oficio_Tutela.docx",
+          "description": "Oficio de respuesta",
+          "size": "780KB"
+        },
+        {
+          "name": "Reporte_Financiero.xlsx",
+          "description": "Reporte de gastos",
+          "size": "500KB"
+        },
+        {
+          "name": "Presentacion_Caso.pptx",
+          "description": "Presentación del caso",
+          "size": "3MB"
+        },
+        {
+          "name": "Documentos_Tutela.zip",
+          "description": "Carpeta comprimida con documentación",
+          "size": "10MB"
+        },
+        {
+          "name": "Notas.txt",
+          "description": "Notas adicionales sobre el caso",
+          "size": "5KB"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,338 @@
+<router-outlet></router-outlet>
+
+<!-- BEGIN page-header -->
+<div class="page-header d-flex justify-content-between align-items-center">
+  <h4 class="m-0">
+    <i class="bi bi-envelope-fill me-2"></i>
+    CORRESPONDENCIAS<small></small>
+  </h4>
+
+  <div class="d-flex align-items-center gap-2">
+    <button class="btn btn-sm btn-success" (click)="addNewCorrespondence()" ngbTooltip="Nueva correspondencia">
+      <i class="fa fa-plus fa-fw"></i>
+    </button>
+    <button class="btn btn-sm btn-primary" ngbTooltip="Refrescar datos">
+      <i class="fa fa-sync-alt fa-fw"></i>
+    </button>
+    <button class="btn btn-sm btn-outline-primary" (click)="printPage()" ngbTooltip="Imprimir">
+      <i class="fa fa-print fa-fw"></i>
+    </button>
+  </div>
+</div>
+<!-- END page-header -->
+
+<!-- BEGIN panel -->
+<panel title="Listado General" footerClass="pb-0 pt-20px">
+
+  <div class="card-body">
+    @if (isLoading) {
+    <div class="text-center py-4">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Cargando...</span>
+      </div>
+      <p class="mt-2">Cargando correspondencias...</p>
+    </div>
+    } @else {
+
+    <!-- Filtros avanzados -->
+    <div class="row gx-2 gx-lg-3 gy-2 pb-2 pb-lg-3">
+
+      <div class="col-12 col-lg-auto d-flex flex-nowrap gap-2 mb-lg-0 align-items-center">
+        <!-- Botón columnas -->
+        <div class="flex-shrink-0">
+          <button class="btn btn-outline-secondary p-2" type="button" id="fieldsDropdown" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            <i class="bi bi-columns-gap"></i>
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="fieldsDropdown">
+            @for (field of getFieldNames(); track field.key) {
+            <li>
+              <div class="dropdown-item">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" [(ngModel)]="showFields[field.key]"
+                    (change)="saveColumnPreferences()" id="check-{{field.key}}">
+                  <label class="form-check-label" for="check-{{field.key}}">
+                    {{field.label}}
+                  </label>
+                </div>
+              </div>
+            </li>
+            }
+          </ul>
+        </div>
+
+        <!-- Botón mostrar/ocultar -->
+        <div class="flex-shrink-0">
+          <button class="btn btn-outline-secondary p-2" (click)="toggleAllFields()">
+            <i class="bi" [class.bi-eye-fill]="allFieldsVisible" [class.bi-eye-slash-fill]="!allFieldsVisible"></i>
+          </button>
+        </div>
+
+        <!-- Búsqueda - Versión mejorada -->
+        <div class="flex-grow-1 min-w-150px">
+          <div class="position-relative w-100">
+            <input type="text" class="form-control ps-4 rounded-3 w-100" [(ngModel)]="searchText"
+              (input)="filterCorrespondences()" placeholder="Buscar...">
+            <button
+              class="btn position-absolute start-0 top-0 h-100 shadow-none d-flex align-items-center justify-content-center px-2">
+              <i class="fa fa-search"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Botón quitar filtro -->
+        <div class="flex-shrink-0">
+          <button class="btn btn-outline-secondary p-2" (click)="clearAllFilters()" title="Quitar filtros"
+            [enabled]="!searchText">
+            <i class="bi bi-x-circle-fill"></i>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Filtro de rango de fechas -->
+      <div class="col-12 col-lg-auto d-flex flex-wrap gap-2">
+
+        <div class="flex-grow-1 flex-lg-grow-0" style="min-width: 250px;">
+          <app-date-range-picker [dateselected]="dateselected" (dateRangeChanged)="onDateRangeChange($event)"
+            class="w-100 w-lg-auto">
+          </app-date-range-picker>
+        </div>
+
+        <!-- Filtro de tipo -->
+        <div class="flex-grow-1 flex-lg-grow-0">
+          <div class="dropdown w-100">
+            <a href="#" class="btn btn-white d-flex align-items-center rounded-3 w-100" data-bs-toggle="dropdown">
+              <span class="iconify fs-5 me-2 text-theme" data-icon="bi:tags"></span>
+              <span class="text-truncate">{{ selectedType?.descripcion || 'Tipo' }}</span>
+              <i class="fa ms-auto fa-chevron-down"></i>
+            </a>
+            <ul class="dropdown-menu w-100">
+              <li>
+                <a class="dropdown-item d-flex align-items-center" href="javascript:;" (click)="selectType(null)">
+                  <i class="bi bi-x-circle me-2"></i>
+                  Todos
+                </a>
+              </li>
+              <li *ngFor="let type of correspondenceMetadataService.cachedMetadata.correspondenceTypes || []">
+                <a class="dropdown-item d-flex align-items-center" href="javascript:;" (click)="selectType(type)">
+                  <span class="iconify me-2" data-icon="bi:tags"></span>
+                  {{ type.descripcion }}
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Filtro de estado -->
+        <div class="flex-grow-1 flex-lg-grow-0">
+          <div class="dropdown w-100">
+            <a href="#" class="btn btn-white d-flex align-items-center rounded-3 w-100" data-bs-toggle="dropdown">
+              <span class="iconify fs-5 me-2 text-theme" [ngClass]="uiService.getStatusColorClass(selectedStatus)"
+                data-icon="bi:info-circle"></span>
+              <span class="text-truncate">{{ selectedStatus?.descripcion || 'Estado' }}</span>
+              <i class="fa ms-auto fa-chevron-down"></i>
+            </a>
+            <ul class="dropdown-menu w-100">
+              <li>
+                <a class="dropdown-item d-flex align-items-center" href="javascript:;" (click)="selectStatus(null)">
+                  <i class="bi bi-x-circle me-2"></i>
+                  Todos
+                </a>
+              </li>
+              <li *ngFor="let status of correspondenceMetadataService.cachedMetadata.documentStatuses || []">
+                <a class="dropdown-item d-flex align-items-center" href="javascript:;" (click)="selectStatus(status)">
+                  <span class="iconify me-2" data-icon="bi:info-circle"></span>
+                  {{ status.descripcion }}
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Filtro de categoría -->
+        <div class="flex-grow-1 flex-lg-grow-0">
+          <div class="dropdown w-100">
+            <a href="#" class="btn btn-white d-flex align-items-center rounded-3 w-100" data-bs-toggle="dropdown">
+              <span class="iconify fs-5 me-2 text-theme" data-icon="bi:bookmark"></span>
+              <span class="text-truncate">{{ selectedCategory?.descripcion || 'Categoría' }}</span>
+              <i class="fa ms-auto fa-chevron-down"></i>
+            </a>
+            <ul class="dropdown-menu w-100">
+              <li>
+                <a class="dropdown-item d-flex align-items-center" href="javascript:;" (click)="selectCategory(null)">
+                  <i class="bi bi-x-circle me-2"></i>
+                  Todas
+                </a>
+              </li>
+              <li *ngFor="let category of correspondenceMetadataService.cachedMetadata.correspondenceCategories || []">
+                <a class="dropdown-item d-flex align-items-center" href="javascript:;"
+                  (click)="selectCategory(category)">
+                  <span class="iconify me-2" data-icon="bi:bookmark"></span>
+                  {{ category.descripcion }}
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Filtro de dependencia -->
+        <div class="flex-grow-1 flex-lg-grow-0">
+          <div class="dropdown w-100">
+            <a href="#" class="btn btn-white d-flex align-items-center rounded-3 w-100" data-bs-toggle="dropdown">
+              <span class="iconify fs-5 me-2 text-theme" data-icon="bi:building"></span>
+              <span class="text-truncate">{{ selectedDependence?.descripcion || 'Dependencia' }}</span>
+              <i class="fa ms-auto fa-chevron-down"></i>
+            </a>
+            <ul class="dropdown-menu w-100">
+              <li>
+                <a class="dropdown-item d-flex align-items-center" href="javascript:;" (click)="selectDependence(null)">
+                  <i class="bi bi-x-circle me-2"></i>
+                  Todas
+                </a>
+              </li>
+              <li *ngFor="let dependence of correspondenceMetadataService.cachedMetadata.dependences || []">
+                <a class="dropdown-item d-flex align-items-center" href="javascript:;" (click)="selectDependence(dependence)">
+                  <span class="iconify me-2" data-icon="bi:building"></span>
+                  {{ dependence.descripcion }}
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+
+    <div class="table-responsive">
+      <table class="table table-hover table-striped">
+        <thead class="table-light">
+          <tr>
+            @for (field of getFieldNames(); track field.key) {
+            <th *ngIf="showFields[field.key]" (click)="sortBy(field.key)"
+              [class.sort-asc]="currentSortField === field.key && isSortAscending"
+              [class.sort-desc]="currentSortField === field.key && !isSortAscending" style="cursor: pointer;">
+              {{field.label}}
+              <i class="bi ms-1" [class.bi-arrow-up]="currentSortField === field.key && isSortAscending"
+                [class.bi-arrow-down]="currentSortField === field.key && !isSortAscending"
+                [class.bi-arrow-down-up]="currentSortField !== field.key"
+                [class.text-primary]="currentSortField === field.key"
+                [class.text-muted]="currentSortField !== field.key">
+              </i>
+            </th>
+            }
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (correspondence of paginatedCorrespondences; track correspondence.filingNumber) {
+          <tr>
+            <!-- N° Radicado -->
+            <td *ngIf="showFields.filingNumber"><strong>{{ correspondence.filingNumber }}</strong></td>
+
+            <!-- Fecha Radicación -->
+            <td *ngIf="showFields.filingDate">{{ correspondence.filingDate | date:'dd/MM/yyyy' }}</td>
+
+            <!-- Fecha Documento -->
+            <td *ngIf="showFields.documentDate">{{ correspondence.documentDate | date:'dd/MM/yyyy' }}</td>
+
+            <!-- Radicación Externa -->
+            <td *ngIf="showFields.externalFiling">{{ correspondence.externalFiling || 'N/A' }}</td>
+
+            <!-- Nombre Remitente -->
+            <td *ngIf="showFields.senderName">
+              {{ getSenderFullName(correspondence.senders?.idUser) || 'N/A' }}
+            </td>
+
+            <!-- Asunto -->
+            <td *ngIf="showFields.subject">{{ correspondence.subject }}</td>
+
+            <!-- Contenido -->
+            <td *ngIf="showFields.content">
+              <button class="btn btn-sm btn-info" ngbTooltip="Ver contenido" (click)="viewContent(correspondence.text)">
+                <i class="bi bi-text-paragraph"></i>
+              </button>
+            </td>
+
+            <!-- Tipo -->
+            <td *ngIf="showFields.type">{{ correspondence.correspondenceType?.descripcion }}</td>
+
+            <!-- Estado -->
+            <td *ngIf="showFields.status">
+              <span [ngClass]="getStatusClass(correspondence.documentStatus?.codDocumentStatus)">
+                {{ correspondence.documentStatus?.descripcion }}
+              </span>
+            </td>
+
+            <!-- Categoría -->
+            <td *ngIf="showFields.category">
+              {{ correspondence.CorrespondenceCategory?.descripcion || 'N/A' }}
+            </td>
+
+            <!-- Días Expiración -->
+            <td *ngIf="showFields.expiresInDays">
+              {{ correspondence.CorrespondenceCategory?.expiresInDays || 'N/A' }}
+            </td>
+
+            <!-- Dependencia -->
+            <td *ngIf="showFields.dependence">{{ correspondence.dependence?.descripcion }}</td>
+
+            <!-- Acciones -->
+            <td class="text-end">
+              <div class="d-flex flex-lg-row flex-column align-items-center gap-1">
+                <button class="btn btn-xs btn-outline-primary" ngbTooltip="Ver"
+                  (click)="viewAttachments(correspondence)">
+                  <i class="bi bi-eye"></i>
+                </button>
+                <button class="btn btn-xs btn-outline-success" ngbTooltip="Editar"
+                  (click)="editCorrespondence(correspondence)">
+                  <i class="bi bi-pencil"></i>
+                </button>
+                <button class="btn btn-xs btn-outline-danger" ngbTooltip="Eliminar"
+                  (click)="onDeleteCorrespondence(correspondence.filingNumber)">
+                  <i class="bi bi-trash"></i>
+                </button>
+              </div>
+
+            </td>
+          </tr>
+          } @empty {
+          <tr>
+            <td [attr.colspan]="getVisibleColumnsCount()" class="text-center text-muted py-4">
+              No se encontraron correspondencias
+            </td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <div class="d-flex justify-content-between align-items-center mt-3">
+      <div class="text-muted">
+        Mostrando {{ (page - 1) * pageSize + 1 }} a
+        {{ min(page * pageSize, filteredCorrespondences.length) }} de
+        {{ filteredCorrespondences.length }} registros
+      </div>
+      <ngb-pagination [(page)]="page" [pageSize]="pageSize" [collectionSize]="filteredCorrespondences.length"
+        [maxSize]="5" [boundaryLinks]="true" class="d-flex justify-content-end"></ngb-pagination>
+    </div>
+    }
+  </div>
+
+
+  <ng-container outsideBody>
+    <!-- BEGIN hljs-wrapper -->
+    <div class="hljs-wrapper">
+      <pre><code class="xml" ></code></pre>
+    </div>
+    <!-- END hljs-wrapper -->
+  </ng-container>
+</panel>
+<!-- END panel -->
+
+
+<!-- Modal para visualizar adjuntos -->
+<app-attachments-modal [isOpen]="showAttachmentsModal" [correspondence]="selectedCorrespondence"
+  (closed)="closeAttachmentsModal()" (attachmentClicked)="onAttachmentClicked($event)">
+</app-attachments-modal>

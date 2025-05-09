@@ -1,0 +1,58 @@
+<!-- Área de subida de archivos mejorada -->
+<div class="file-upload-container">
+  <!-- Área de drag and drop 
+  <div class="file-drop-area" 
+       (drop)="onDrop($event)" 
+       (dragover)="onDragOver($event)" 
+       (dragleave)="onDragLeave($event)"
+       [class.active]="isDragOver"
+       (click)="fileInput.click()">
+    <div class="drop-message">
+      <i class="fa fa-cloud-upload-alt"></i>
+      <p>Arrastra archivos aquí o haz clic para seleccionar</p>
+    </div>
+  </div>-->
+
+  <!-- Input de archivo oculto -->
+  <input type="file" multiple (change)="onFileSelected($event)" #fileInput style="display: none;"
+    accept=".xml,.zip" />
+
+  <!-- Botón de subida alternativo -->
+  <div class="upload-icon-wrapper">
+    <a href="javascript:;" class="btn btn-link p-2" (click)="fileInput.click()" title="Subir archivos">
+      <i class="fa fa-upload fa-1x"></i> <!-- fa-2x duplica el tamaño -->
+    </a>
+
+  </div>
+
+</div>
+
+<!-- Modal de confirmación Bootstrap -->
+<div #confirmationModal id="fileUploadConfirmationModal" 
+ class="modal fade" tabindex="-1" aria-hidden="true" data-bs-backdrop="static">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header bg-light">
+        <h5 class="modal-title">Procesar Facturas</h5>
+        <button type="button" class="btn-close" (click)="onConfirmSave(false)"></button>
+      </div>
+      <div class="modal-body">
+        <p>¿Desea guardar las siguientes facturas en el servidor?</p>
+        <div class="file-list bg-light p-2 mb-3 rounded">
+          <ul class="mb-0">
+            <li *ngFor="let file of pendingFiles" class="text-break">{{file.name}}</li>
+          </ul>
+        </div>
+        <p class="text-muted small">Los archivos siempre se guardarán localmente.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" (click)="onConfirmSave(false)">
+          Solo local
+        </button>
+        <button type="button" class="btn btn-primary" (click)="onConfirmSave(true)">
+          Guardar en servidor
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

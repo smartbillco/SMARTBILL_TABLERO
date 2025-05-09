@@ -1,0 +1,300 @@
+<!-- Modal para mostrar información de la empresa -->
+<div class="modal fade" id="fileModal" tabindex="-1" aria-labelledby="fileModalLabel" aria-hidden="true"
+    data-bs-backdrop="static" data-bs-keyboard="false">
+
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+            <div class="modal-header bg-primary text-white py-2">
+                <div class="d-flex flex-column">
+                    <h5 class="modal-title" id="fileModalLabel" style="text-transform: uppercase;">
+                        <i class="bi bi-file-earmark-text"></i>PROVEEDOR: {{ selectedFile?.registrationName }}
+                    </h5>
+                    <p class="mb-0"><strong></strong>DOCUMENTO: {{ selectedFile?.id }}</p>
+                </div>
+                <button type="button" class="btn-close text-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+                <!-- Sección de Facturas -->
+
+                <!-- BEGIN result-list -->
+                <div class="table-responsive mb-4">
+                    <div class="card shadow-sm border-0">
+                        <div class="card-body p-2">
+
+                            <table class="table table-hover table-sm align-middle">
+                                <thead class="bg-success text-white">
+                                    <tr>
+                                        <th class="text-center" style="width: 5%;">#</th>
+                                        <th style="width: 30%;">Factura y Cliente</th>
+                                        <th style="width: 15%;">Fecha</th>
+                                        <th style="width: 15%;">Total</th>
+                                        <th class="text-center" style="width: 20%;">Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let invoice of selectedFile?.invoices; let i = index">
+                                        <!-- Número de factura -->
+                                        <td class="text-center text-muted">{{ i + 1 }}</td>
+
+                                        <!-- Información de la factura con ícono y nombre del cliente -->
+                                        <td>
+                                            <div class="d-flex align-items-start flex-column">
+                                                <div class="d-flex align-items-center">
+                                                    <i class="fa fa-file-invoice fa-lg text-secondary me-2"></i>
+                                                    <span class="text-dark font-weight-bold" data-bs-toggle="tooltip"
+                                                        data-bs-placement="top"
+                                                        title="Factura: {{ invoice.documentReference }} | Cliente: {{ invoice.cliente }}">
+                                                        # {{ invoice.documentReference }}
+                                                    </span>
+                                                </div>
+                                                <small class="text-muted ms-4">Cliente: {{ invoice.cliente }}</small>
+                                            </div>
+                                        </td>
+
+                                        <!-- Fecha de la factura -->
+                                        <td><small>{{ invoice.issueDate | date: 'shortDate' }}</small></td>
+
+                                        <!-- Total con color dinámico -->
+                                        <td>
+                                            <strong
+                                                [ngClass]="{'text-danger': invoice.totalFacturaFormatted > 50000,'text-success': invoice.totalFacturaFormatted <= 1000000}">
+                                                {{ monedaObjetivo }} {{ symbol }}&nbsp;{{ invoice.totalFacturaFormatted
+                                                | number:'1.2-2' }}
+                                            </strong>
+                                        </td>
+
+                                        <!-- Estado de la factura con color distintivo
+            <td>
+              <span [ngClass]="{'badge bg-success': invoice.estado === 'Pagada', 
+                                'badge bg-warning': invoice.estado === 'Pendiente',
+                                'badge bg-danger': invoice.estado === 'Vencida'}">
+                {{ invoice.estado }}
+              </span>
+            </td>-->
+
+                                        <!-- Botones de acción con iconos y tooltips -->
+                                        <td class="text-center">
+                                            <a href="javascript:;" (click)="openInvoiceDetailsModal(invoice)"
+                                                class="btn btn-outline-warning btn-sm" data-bs-toggle="tooltip"
+                                                data-bs-placement="top" title="Ver detalle">
+                                                <i class="fa fa-eye"></i>
+                                            </a>
+                                            <a href="javascript:;" class="btn btn-outline-primary btn-sm mx-1"
+                                                data-bs-toggle="tooltip" data-bs-placement="top" title="Editar factura"
+                                                [class.disabled]="true">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                            <a href="javascript:;" class="btn btn-outline-success btn-sm"
+                                                data-bs-toggle="tooltip" data-bs-placement="top"
+                                                title="Descargar factura" [class.disabled]="true">
+                                                <i class="fa fa-download"></i>
+                                            </a>
+                                            <a href="javascript:;" class="btn btn-outline-danger btn-sm ms-1"
+                                                data-bs-toggle="tooltip" data-bs-placement="top"
+                                                title="Eliminar factura" [class.disabled]="true">
+                                                <i class="fa fa-trash"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- END result-list -->
+
+
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    <i class="bi bi-x-circle"></i> Cerrar
+                </button>
+                <button type="button" class="btn btn-primary" (click)="exportData()">
+                    <i class="bi bi-file-earmark-pdf"></i> Exportar a PDF
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Modal de detalles de la factura -->
+<div class="modal fade" id="invoiceDetailsModal" tabindex="-1" aria-labelledby="invoiceDetailsModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content shadow-lg border-0 rounded-3">
+
+            <!-- BEGIN invoice -->
+            <div class="invoice">
+
+                <!-- BEGIN invoice-company -->
+                <div class="invoice-company">
+                    <span class="float-end hidden-print">
+                        <a href="javascript:;" class="btn btn-sm btn-outline-danger mb-10px me-2">
+                            <i class="fa fa-file-pdf t-plus-1 fa-fw fa-lg"></i> Exportar PDF
+                        </a>
+                        <a href="javascript:;" onclick="window.print()" class="btn btn-sm btn-outline-primary mb-10px">
+                            <i class="fa fa-print t-plus-1 fa-fw fa-lg"></i> Imprimir
+                        </a>
+                    </span>
+
+                    <h5 class="modal-title text-uppercase fw-bold" id="invoiceDetailsModalLabel">
+                        <i class="bi bi-file-earmark-text me-2"></i>{{ selectedFile?.registrationName }}
+                    </h5>
+                </div>
+                <!-- END invoice-company -->
+
+                <!-- BEGIN invoice-header -->
+                <div class="invoice-header py-1">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <!-- Información de la factura -->
+                        <div class="invoice-from d-flex align-items-center">
+                            <i class="bi bi-file-earmark-text me-2 text-primary"></i> <!-- Icono de factura -->
+                            <strong class="text-dark me-2">Factura</strong>
+                            <span class="text-muted text-nowrap">#{{ selectedInvoice?.documentReference }}</span>
+                        </div>
+
+                        <!-- Información de la fecha y cliente -->
+                        <div class="text-end d-flex flex-column align-items-end">
+                            <small class="text-muted">Fecha:</small>
+                            <strong class="text-dark">{{ selectedInvoice?.issueDate | date }}</strong>
+                        </div>
+                        <div class="text-end d-flex flex-column align-items-end ms-2">
+                            <small class="text-muted">Cliente:</small>
+                            <strong class="text-dark">{{ selectedInvoice?.cliente }}</strong>
+                        </div>
+                    </div>
+                </div>
+                <!-- END invoice-header -->
+
+                <!-- BEGIN invoice-content -->
+                <div *ngIf="selectedInvoice">
+                    <div class="invoice-content">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered table-hover">
+                                <thead class="table-primary">
+                                    <tr>
+                                        <th>DESCRIPCIÓN</th>
+                                        <th class="text-center" width="10%">PRECIO</th>
+                                        <th class="text-center" width="10%">IMPUESTOS</th>
+                                        <th class="text-end" width="20%">TOTAL</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let description of selectedInvoice.descriptionsItem; let i = index">
+                                        <td>
+                                            <span class="text-dark">{{ description }}</span>
+                                        </td>
+                                        <td class="text-center">
+                                            {{ monedaObjetivo }} {{ symbol }}&nbsp;{{
+                                            selectedInvoice.precioItemFormatted[i] | number:'1.2-2' }}
+                                        </td>
+                                        <td class="text-center">
+                                            {{ monedaObjetivo }} {{ symbol }}&nbsp;{{
+                                            selectedInvoice.impuestoValorItemFormatted[i] | number:'1.2-2' }}
+
+                                        </td>
+                                        <td class="text-end">
+
+
+                                            {{ monedaObjetivo }} {{ symbol }}&nbsp;{{
+                                            (selectedInvoice.precioItemFormatted[i] +
+                                            (selectedInvoice.impuestoValorItemFormatted[i] ||
+                                            0)) | number:'1.2-2' }}
+
+
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- END invoice-content -->
+
+                <!-- BEGIN invoice-price -->
+                <div class="invoice-price mt-4">
+                    <div class="invoice-price-left">
+                        <div class="invoice-price-row">
+                            <div class="sub-price">
+                                <small>SUBTOTAL PRECIO</small>
+                                <span class="text-dark">
+                                    {{ monedaObjetivo }} {{ symbol }}&nbsp;{{ selectedInvoice?.subtotalPrecio |
+                                    number:'1.2-2' }}
+
+                                </span>
+                            </div>
+                            <div class="sub-price">
+                                <i class="fa fa-plus text-muted"></i>
+                            </div>
+                            <div class="sub-price">
+                                <small>SUBTOTAL IMPUESTOS</small>
+                                <span class="text-dark">
+                                    {{ monedaObjetivo }} {{ symbol }}&nbsp;{{ selectedInvoice?.subtotalImpuesto |
+                                    number:'1.2-2' }}
+
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="invoice-price-right">
+                        <small>TOTAL</small>
+                        <span class="fw-bold">
+                            {{ monedaObjetivo }} {{ symbol }}&nbsp;{{ selectedInvoice?.totalFacturaFormatted |
+                            number:'1.2-2' }}
+
+                        </span>
+                    </div>
+                </div>
+                <!-- END invoice-price -->
+
+            </div>
+            <!-- END invoice -->
+
+        </div>
+    </div>
+</div>
+
+
+<!-- Cuerpo del panel -->
+<div class="row fs-12px">
+    <!-- Columna izquierda para la lista de archivos -->
+    <div class="col-md-50">
+
+        <!-- Contenedor de tabla con scroll y altura definida -->
+        <div class="widget-map-body">
+            <div class="table-responsive">
+                <table class="table table-striped mb-0 align-middle" style="font-size: 11px;">
+                    <thead>
+                        <tr style="position: sticky; top: 0; background-color: white; z-index: 1;">
+                            <th class="w-5">#</th>
+                            <th class="w-45">Empresa</th>
+                            <th class="w-50 text-end">Valor</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let company of companiesData; let i = index" (click)="openFileModal(company)">
+                            <td>{{ i + 1 }}</td>
+                            <td>{{ company.registrationName }}</td>
+                            <td class="text-end">
+                                {{ monedaObjetivo }} {{ symbol }}&nbsp;{{ company.totalBilledConverted |
+                                number:'1.2-2' }}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- Fin del contenedor de tabla -->
+    </div>
+
+
+</div>
+
+<!-- Fin del panel de facturas clasificadas -->

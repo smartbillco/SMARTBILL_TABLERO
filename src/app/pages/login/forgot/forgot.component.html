@@ -1,0 +1,51 @@
+<div class="container">
+  <h2>Restablecimiento de Contraseña</h2>
+
+  <!-- Selección del método de recuperación -->
+  <div *ngIf="!random">
+    <label>Método de recuperación:</label>
+    <select [(ngModel)]="selectedMethod" (change)="onMethodChange(selectedMethod)">
+      <option value="otp">Por OTP</option>
+      <option value="email">Por Correo</option>
+    </select>
+  </div>
+
+  <!-- Formulario de OTP -->
+  <div *ngIf="showOtpForm && !random">
+    <h3>Validar OTP</h3>
+    <form [formGroup]="otpForm" (ngSubmit)="validateOtp()">
+      <div>
+        <label>Usuario:</label>
+        <input formControlName="username" type="text" />
+      </div>
+      <div *ngIf="isOtpValid">
+        <label>OTP:</label>
+        <input formControlName="otp" type="text" />
+      </div>
+      <button type="button" (click)="sendOtp()" [disabled]="otpButtonDisabled">Enviar OTP</button>
+      <button type="submit" [disabled]="!isOtpValid">Validar OTP</button>
+
+      <!-- Mostrar temporizador si el botón está deshabilitado -->
+      <div *ngIf="otpButtonDisabled">
+        Puedes reenviar el OTP en {{ otpTimer }} segundos.
+      </div>
+    </form>
+  </div>
+
+  <!-- Formulario de Correo -->
+  <div *ngIf="showEmailForm && !random">
+    <h3>Enviar correo de restablecimiento</h3>
+    <form [formGroup]="emailForm" (ngSubmit)="sendResetMail()">
+      <div>
+        <label>Username:</label>
+        <input formControlName="username" type="text" />
+      </div>
+      <button type="submit" [disabled]="emailButtonDisabled">Enviar correo de restablecimiento</button>
+
+      <!-- Mostrar temporizador si el botón está deshabilitado -->
+      <div class="timer" *ngIf="emailButtonDisabled">
+        Puedes reenviar el correo en <span>{{ emailTimer }}</span> segundos.
+      </div>
+    </form>
+  </div>
+</div>

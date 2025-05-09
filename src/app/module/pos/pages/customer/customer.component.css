@@ -1,0 +1,143 @@
+table {
+    width: 100%;
+  }
+  
+  .mat-mdc-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+  
+  td, th {
+    width: 25%;
+  }
+
+  
+/* Iconos */
+.icon-large {
+  width: 30px;
+  height: 30px;
+  font-size: 15px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.icon-edit {
+  border: 1px solid #007bff;
+  background-color: white;
+  color: #007bff;
+}
+
+.icon-delete {
+  border: 1px solid #ff6b68;
+  background-color: white;
+  color: #ff6b68;
+}
+
+.icon-edit:hover, .icon-delete:hover {
+  background-color: rgba(0, 123, 255, 0.1);
+}
+
+/* Encabezado azul */
+.blue-header {
+  background-color: #007bff;
+  color: #fff;
+  height: 60px;
+}
+
+.blue-header:hover {
+  background-color: #0056b3;
+  text-align: center;
+}
+
+
+.titulo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: #cacaca;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.titulo {
+  margin: 0;
+  font-weight: bold;
+}
+
+/* Pestañas personalizadas */
+.custom-tab-group .mat-tab-label {
+  background-color: #add8e6;
+}
+
+.custom-tab-group .mat-tab-label:hover {
+  background-color: #b0e0e6;
+}
+
+.custom-tab-group .mat-tab-label.mat-tab-label-active {
+  background-color: #87ceeb;
+}
+
+/* Detalles de fila */
+p.detalle-fila {
+  background-color: #c6cfd8;
+  padding: 10px;
+  margin-bottom: 2px;
+  border-radius: 5px;
+}
+
+
+
+
+table {
+  width: 100%;
+}
+
+tr.example-detail-row {
+  height: 0;
+}
+
+tr.example-element-row:not(.example-expanded-row):hover {
+  background: whitesmoke;
+}
+
+tr.example-element-row:not(.example-expanded-row):active {
+  background: #efefef;
+}
+
+.example-element-row td {
+  border-bottom-width: 0;
+}
+
+.example-element-detail {
+  overflow: hidden;
+  display: flex;
+}
+
+.example-element-diagram {
+  min-width: 80px;
+  border: 2px solid black;
+  padding: 8px;
+  font-weight: lighter;
+  margin: 8px 0;
+  height: 104px;
+}
+
+.example-element-symbol {
+  font-weight: bold;
+  font-size: 40px;
+  line-height: normal;
+}
+
+.example-element-description {
+  padding: 16px;
+}
+
+.example-element-description-attribution {
+  opacity: 0.5;
+}
+

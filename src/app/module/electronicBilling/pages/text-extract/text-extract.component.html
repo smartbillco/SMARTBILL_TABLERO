@@ -1,0 +1,40 @@
+<div class="container">
+  <h2>Extracción de Texto</h2>
+
+  <input type="file" (change)="onFileSelected($event)" />
+
+  <div class="buttons" *ngIf="selectedFile">
+    <button (click)="extractFromPDF()">Texto de PDF</button>
+    <button (click)="extractDetailsFromPDF()">Detalles de PDF</button>
+
+    <button (click)="extractFromImage()">Texto de Imagen</button>
+    <button (click)="extractDetailsFromImage()">Detalles de Imagen</button>
+  </div>
+
+  <div *ngIf="loading" class="loading">
+    Cargando...
+  </div>
+
+  <div *ngIf="error" class="error">
+    {{ error }}
+  </div>
+
+  <div *ngIf="extractedText.length > 0">
+    <h3>Texto Extraído:</h3>
+    <ul>
+      <li *ngFor="let line of extractedText">{{ line }}</li>
+    </ul>
+  </div>
+
+  <div *ngIf="extractedDetails && objectKeys(extractedDetails).length > 0">
+    <h3>Detalles Extraídos:</h3>
+    <ul>
+      <li *ngFor="let key of objectKeys(extractedDetails)">
+        <strong>{{ key }}:</strong> {{ extractedDetails[key] }}
+      </li>
+    </ul>
+  </div>
+
+
+
+</div>

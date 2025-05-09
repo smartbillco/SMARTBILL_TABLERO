@@ -1,0 +1,58 @@
+
+
+  <!-- Títulos de columnas -->
+  <table class="table table-panel align-middle mb-0">
+    <thead>
+      <tr class="text-center">
+        <th>País</th>
+        <th>Porcentaje</th>
+        <th>Facturado</th>
+        <th>USD</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let country of countries">
+        <!-- País -->
+        <td class="d-flex align-items-center">
+
+          <div class="widget-list-media icon" data-bs-toggle="tooltip" data-bs-placement="top"
+            title="{{ country.name }}">
+            <div class="widget-img widget-img-xs rounded bg-inverse me-2" [ngClass]="getCountryIconClass(country.flag)">
+            </div>
+          </div>
+
+          <!--
+          <div class="widget-list-content">
+            <h6 class="widget-list-title">{{ country.name }}</h6>
+          </div>
+          -->
+
+        </td>
+        <!-- Porcentaje -->
+        <td class="text-center">
+          <span class="badge bg-blue fs-10px">
+            {{ country.percentage | number: '1.2-2' }}%
+          </span>
+        </td>
+        <!-- Facturado -->
+        <td class="text-center">
+          <span class="badge bg-green fs-10px ms-2">
+            {{ countryDetails[country.flag].symbol }}{{ country.total | number: '1.2-2' }}
+          </span>
+        </td>
+        <!-- Convertido -->
+        <td class="text-center">
+          <span class="badge bg-green fs-10px ms-2">
+            {{ countryDetails['us'].symbol }}{{ country.convertedTotal | number: '1.2-2' }}
+          </span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Botón dinámico para mostrar el precio del dólar -->
+  <button class="btn btn-info w-100" (click)="showNextExchangeRate()">
+    <i [ngClass]="getCountryIconClass(currentExchangeRate.countryCode)" class="me-2"></i>
+    Precio del dólar ({{ currentExchangeRate.currency }}): {{ currentExchangeRate.rate | number: '1.2-2' }} {{
+    currentExchangeRate.symbol }}
+  </button>

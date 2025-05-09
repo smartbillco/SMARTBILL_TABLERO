@@ -1,0 +1,34 @@
+.widget-input-box {
+  position: relative; /* Para asegurarnos de que el contenedor de la lista de autocompletado esté posicionado relativo a este contenedor */
+}
+
+ul.list-group {
+  position: absolute;
+  top: 100%; /* Para que la lista de autocompletado aparezca justo debajo del input */
+  left: 0;
+  right: 0;
+  z-index: 10; /* Para asegurar que la lista esté encima de otros elementos */
+  max-height: 250px; /* Limitar el tamaño de la lista */
+  overflow-y: auto; /* Si hay más elementos, se podrá hacer scroll */
+  background-color: white;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* Sombra para darle un efecto de flotado */
+  border: 1px solid #ccc;
+}
+
+
+
+
+
+
+.btn-upload {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-upload:hover {
+  background-color: #45a049;
+}

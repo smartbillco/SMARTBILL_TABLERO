@@ -1,0 +1,232 @@
+<div class="widget rounded mb-4 bg-white">
+	<div class="widget-header">
+		<h4 class="widget-header-title"> EMPRESAS EN {{ selectedCountry?.countryName ? (selectedCountry.countryName | uppercase) :
+            'SIN PAiS SELECCIONADO' }}</h4>
+		<div class="widget-header-icon">
+			<a href="javascript:;" class="text-gray-500"><i class="fa fa-fw fa-cog"></i></a>
+		</div>
+	</div>
+
+    
+    <!-- BEGIN widget-content -->
+    <div class="row m-0">
+        <!-- BEGIN tabs -->
+        <ul class="nav nav-tabs nav-tabs-inverse nav-justified">
+            <li class="nav-item">
+                <a href="#latest-post" data-bs-toggle="tab" class="nav-link active">
+                    <i class="fa fa-chart-bar fa-lg me-2"></i>
+                    <span class="d-none d-md-inline">Mayor Facturación</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#purchase" data-bs-toggle="tab" class="nav-link">
+                    <i class="fa fa-chart-line fa-lg me-2"></i>
+                    <span class="d-none d-md-inline">Menor Facturación</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#Personalizable" data-bs-toggle="tab" class="nav-link">
+                    <i class="fa fa-cogs fa-lg me-2"></i>
+                    <span class="d-none d-md-inline">Parametrizable</span>
+                </a>
+            </li>
+        </ul>
+
+        <div class="tab-content panel rounded-0 rounded-bottom mb-20px">
+            <!-- Tab: Mayor Facturación -->
+            <div class="tab-pane fade active show" id="latest-post">
+                <ng-scrollbar >
+                    <table class="table table-panel mb-0">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <!--<th class="hidden-sm text-center">Empresa</th>-->
+                                <th>Empresa</th>
+                                <th>Facturación</th>
+                                <th>%</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let company of getTopCompaniesByCountry(); let i = index">
+
+                                <td class="fw-bold text-muted">{{ i + 1 }}</td>
+                                <!--
+                                <td class="hidden-sm text-center">
+                                    <a href="javascript:;">
+                                        <img src="/assets/img/product/product-1.png" alt="" width="32px" />
+                                    </a>
+                                </td>
+                                -->
+                                <td class="text-nowrap">
+                                    <h6>
+                                        <a href="javascript:;"
+                                            class="text-dark text-decoration-none text-wrap text-break">
+                                            {{ company.registrationName }}
+                                        </a>
+                                    </h6>
+                                </td>
+                                <td class="text-blue fw-bold">
+                                    {{ monedaObjetivo }} {{ symbol }}&nbsp;{{ company.totalBilledConverted |
+                                    number:'1.2-2' }}
+                                </td>
+                                <td class="text-nowrap">
+                                    <a href="javascript:;" class="text-dark text-decoration-none">
+                                        <!-- Aquí puedes calcular el porcentaje si tienes los datos -->
+                                        {{ (company.totalBilledConverted / getTotalFacturado() * 100) | number:
+                                        '1.1-2' }}%
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </ng-scrollbar>
+            </div>
+
+            <!-- Tab: Menor Facturación -->
+            <div class="tab-pane fade" id="purchase">
+
+                <ng-scrollbar class="h-300px">
+                    <table class="table table-panel mb-0">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <!--<th class="hidden-sm text-center">Empresa</th>-->
+                                <th>Empresa</th>
+                                <th>Facturación</th>
+                                <th>%</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let company of getBottomCompaniesByCountry(); let i = index">
+
+                                <td class="fw-bold text-muted">{{ i + 1 }}</td>
+                                <!--
+                                <td class="hidden-sm text-center">
+                                    <a href="javascript:;">
+                                        <img src="/assets/img/product/product-1.png" alt="" width="32px" />
+                                    </a>
+                                </td>
+                                -->
+                                <td class="text-nowrap">
+                                    <h6>
+                                        <a href="javascript:;"
+                                            class="text-dark text-decoration-none text-wrap text-break">
+                                            {{ company.registrationName }}
+                                        </a>
+                                    </h6>
+                                </td>
+                                <td class="text-blue fw-bold">
+                                    {{ monedaObjetivo }} {{ symbol }}&nbsp;{{ company.totalBilledConverted |
+                                    number:'1.2-2' }}
+                                </td>
+                                <td class="text-nowrap">
+                                    <a href="javascript:;" class="text-dark text-decoration-none">
+                                        <!-- Aquí puedes calcular el porcentaje si tienes los datos -->
+                                        {{ (company.totalBilledConverted / getTotalFacturado() * 100) | number:
+                                        '1.1-2' }}%
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </ng-scrollbar>
+
+            </div>
+
+            <!-- Tab: Personalizable -->
+            <div class="tab-pane fade" id="Personalizable">
+
+                <ng-scrollbar class="h-3px">
+                    <table class="table table-panel mb-0">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <!--<th class="hidden-sm text-center">Empresa</th>-->
+                                <th>Empresa</th>
+                                <th>Facturación</th>
+                                <th>%</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr
+                                *ngFor="let company of getCustomFilteredCompanies(filterType, minFacturado, maxFacturado); let i = index">
+
+                                <td class="fw-bold text-muted">{{ i + 1 }}</td>
+                                <!--
+                                        <td class="hidden-sm text-center">
+                                            <a href="javascript:;">
+                                                <img src="/assets/img/product/product-1.png" alt="" width="32px" />
+                                            </a>
+                                        </td>
+                                        -->
+                                <td class="text-nowrap">
+                                    <h6>
+                                        <a href="javascript:;"
+                                            class="text-dark text-decoration-none text-wrap text-break">
+                                            {{ company.registrationName }}
+                                        </a>
+                                    </h6>
+                                </td>
+                                <td class="text-blue fw-bold">
+                                    {{ monedaObjetivo }} {{ symbol }}&nbsp;{{ company.totalBilledConverted |
+                                    number:'1.2-2' }}
+                                </td>
+                                <td class="text-nowrap">
+                                    <a href="javascript:;" class="text-dark text-decoration-none">
+                                        <!-- Aquí puedes calcular el porcentaje si tienes los datos -->
+                                        {{ (company.totalBilledConverted / getTotalFacturado() * 100) | number:
+                                        '1.1-2' }}%
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </ng-scrollbar>
+
+                <!-- Controles para filtrar dinámicamente -->
+                <div class="filters">
+                    <div class="row ">
+                        <!-- --------------------------------  -->
+                        <div class="col-4">
+                            <div class="col-4">Filtro Rango</div>
+                            <select id="filterType" class="form-control" [(ngModel)]="filterType">
+                                <option value="highest">Más Alta</option>
+                                <option value="lowest">Más Baja</option>
+                            </select>
+                        </div>
+                        <!-- --------------------------------  -->
+                        <div class="col-4">
+                            <div class="col-4">Mínimo Facturado</div>
+                            <input type="number" class="form-control" [(ngModel)]="minFacturado" name="minFacturado"
+                                #minFacturadoInput="ngModel" required pattern="^[0-9]+$"
+                                (ngModelChange)="onInputChange(minFacturadoInput)"
+                                (keyup)="onInputChange(minFacturadoInput)" />
+                            <div *ngIf="minFacturadoInput.invalid && minFacturadoInput.touched">
+                                <span *ngIf="minFacturadoInput.errors?.['required']">No se aceptan caracteres</span>
+                                <span *ngIf="minFacturadoInput.errors?.['pattern']">Solo se permiten números
+                                    enteros</span>
+                            </div>
+                        </div>
+                        <!-- --------------------------------  -->
+                        <div class="col-4">
+                            <div class="col-4">Máximo Facturado</div>
+                            <input type="number" class="form-control" [(ngModel)]="maxFacturado" name="maxFacturado"
+                                #maxFacturadoInput="ngModel" required pattern="^[0-9]+$"
+                                (ngModelChange)="onInputChange(maxFacturadoInput)"
+                                (keyup)="onInputChange(maxFacturadoInput)" />
+                            <div *ngIf="maxFacturadoInput.invalid && maxFacturadoInput.touched">
+                                <span *ngIf="maxFacturadoInput.errors?.['required']">No se aceptan caracteres</span>
+                                <span *ngIf="maxFacturadoInput.errors?.['pattern']">Solo se permiten números
+                                    enteros</span>
+                            </div>
+                        </div>
+                        <!-- --------------------------------  -->
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- END tabs -->
+
+</div>

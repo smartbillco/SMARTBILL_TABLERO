@@ -1,0 +1,43 @@
+
+
+
+.widget-card-container {
+    width: 100%;
+    margin-bottom: 5px; /* Reduce el margen inferior aún más */
+    overflow: hidden; /* Para evitar que el aumento desborde el contenedor */
+  }
+  
+  .widget-card {
+    width: 100%;
+    height: 167px; /* Altura muy pequeña para la tarjeta */
+    display: block;
+    text-decoration: none;
+    transition: transform 0.3s ease;
+    position: relative;
+  }
+  
+  .widget-card .widget-card-cover {
+    height: 100%; /* Asegura que la imagen cubra toda la tarjeta */
+  }
+  
+  .widget-card:hover {
+    transform: scale(1.02); /* Aumento muy pequeño en el hover */
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1); /* Sombra muy ligera */
+  }
+  
+  .card-button {
+    width: 100%; /* Ocupa todo el ancho de la card */
+    border-radius: 0; /* Sin bordes redondeados para que se una perfectamente a la card */
+    padding: 3px 0; /* Reduce el padding a un tamaño mínimo */
+    font-size: 10px; /* Reduce el tamaño de la fuente */
+  }
+  
+  .widget-card .text-white {
+    font-size: 10px; /* Tamaño de fuente más pequeño para el título */
+  }
+  
+  .widget-card .text-white-transparent-8 {
+    font-size: 8px; /* Tamaño de fuente aún más pequeño para el año */
+  }
+  
+  

@@ -1,0 +1,16 @@
+<!-- Sección de tarjetas informativas -->
+<ng-container *ngFor="let card of cards">
+	<div class="widget-card-container">
+		<a href="javascript:;" class="widget-card rounded square mb-0" (click)="$event.preventDefault()">
+			<div class="widget-card-cover" [ngStyle]="{'background-image': 'url(' + card.image + ')'}">
+				<div class="d-flex h-100 align-items-center justify-content-center">
+					<div class="text-center">
+						<div class="text-white fs-14px"><b>{{ card.title }}</b></div>
+						<div class="text-white-transparent-8 fw-bold">{{ card.year }}</div>
+					</div>
+				</div>
+			</div>
+		</a>
+		<button class="btn btn-primary card-button" (click)="onCardClick(card)">Ver más</button>
+	</div>
+</ng-container>
